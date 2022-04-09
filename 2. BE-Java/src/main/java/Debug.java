@@ -54,7 +54,7 @@ public class Debug {
         for (int i = 0; i < personaggi.size() ; i++) {
             personaggi.get(i).setNome( nomiPersonaggi.get(i) ) ;
             personaggi.get(i).setAlive(true);
-            personaggi.get(i).setAlive(false);
+            personaggi.get(i).setProtected(false);
             //System.out.println(personaggi.get(i).getNome());
 
             //all'iterazione in cui assegno il nome inserito dall'utente, ritorno che tipo di personaggio sarà capitato all'utente
@@ -62,7 +62,6 @@ public class Debug {
                 System.out.println("Il personaggio a te assegnato è: "+  personaggi.get(i).getClass().getSimpleName());
             }
         }
-
 
     }
 }
