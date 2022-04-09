@@ -1,0 +1,23 @@
+(in angular)
+faccio inserire il nome form => salviamo il nome in un mock-data
+sul click nuova partita => request a java (http-un ruolo rendom)
+
+(in java )
+alla chiamata api /http-un ruolo rendom/  implementiamo un metodo che prende un ruolo da un array
+array.sort (mischia l'array) prendiamo come ruolo da restitutire (array.lenght)
+a=[1,2,3,4,5,6,7,8]
+b=[7 nomi]
+player.ruolo=a.lenght 
+a=a.pop(a.lenght) (togliamo l'ultimo elemento)
+//assegnamo agli altri personaggi con nomi preimpostati da noi i vari suoli restanti
+
+c=[
+    { nome :maria,
+    ruolo :lupo},
+]
+
+for(let element in a){
+    c[nome]=b[element];
+    c[ruolo]=a[element]
+}
+
