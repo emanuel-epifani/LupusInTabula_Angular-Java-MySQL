@@ -3,6 +3,9 @@ package com.example.be_java.Model;
 public class Lupo extends Cattivi{
     private static int countCattivi;
 
+    public Lupo() {
+    }
+
     public Lupo(String nome, boolean isAlive, boolean isProtected) {
         super(nome, isAlive, isProtected);
     }

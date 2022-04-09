@@ -3,6 +3,9 @@ package com.example.be_java.Model;
 public class Cattivi extends Personaggio{
     private static int countCattivi;
 
+    public Cattivi() {
+    }
+
     public Cattivi(String nome, boolean isAlive, boolean isProtected) {
         super(nome, isAlive, isProtected);
         countCattivi++;
@@ -15,4 +18,6 @@ public class Cattivi extends Personaggio{
     public static void setCountCattivi(int countCattivi) {
         Cattivi.countCattivi = countCattivi;
     }
+
+
 }

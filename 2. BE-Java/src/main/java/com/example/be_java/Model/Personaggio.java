@@ -11,6 +11,10 @@ public class Personaggio {
         this.isProtected = isProtected;
     }
 
+    public Personaggio() {
+
+    }
+
     public String getNome() {
         return nome;
     }
