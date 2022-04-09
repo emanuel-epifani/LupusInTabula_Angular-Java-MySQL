@@ -39,39 +39,39 @@ public class CRUDrepository {
         }
 
         //READ
-        public static void getInfoDB() {
-            
-            try{
-                //apro una connessione --> DriverManager.getConnection()
-                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                //definisco la QUERY
-                String QUERY = "SELECt nome FROM Studenti WHERE age = ? AND  scuola = ?";
-
-                //creo un oggetto di tipo statement in cui immagazzinare la mia QUERY
-                PreparedStatement pstmt = conn.prepareStatement(QUERY);
-                int age;
-                pstmt.setInt(27, age);
-                String scuola;
-                pstmt.setString("Engim", scuola);
-
-                //eseguo la QUERY
-                ResultSet rs = pstmt.executeQuery(QUERY);
-                
-                // Extract data from result set
-                while (rs.next()) {
-
-                    System.out.println(rs);//x debug -->x veder cos ho estratto
-                    // faccio cose con i dati ottenuto
-                    System.out.print("ID: " + rs.getInt("id"));
-                    System.out.print(", Age: " + rs.getInt("age"));
-                    System.out.print(", First: " + rs.getString("first"));
-                    System.out.println(", Last: " + rs.getString("last"));
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            
-        }
+//
+//        public static void getInfoDB() {
+//
+//            try{
+//                //apro una connessione --> DriverManager.getConnection()
+//                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//                //definisco la QUERY
+//                String QUERY = "SELECt nome FROM Studenti WHERE age = ? AND  scuola = ?";
+//
+//                //creo un oggetto di tipo statement in cui immagazzinare la mia QUERY
+//                PreparedStatement pstmt = conn.prepareStatement(QUERY);
+//                int age;
+//                pstmt.setInt(27, age);
+//                String scuola;
+//                pstmt.setString("Engim", scuola);
+//
+//                //eseguo la QUERY
+//                ResultSet rs = pstmt.executeQuery(QUERY);
+//
+//                // Extract data from result set
+//                while (rs.next()) {
+//
+//                    System.out.println(rs);//x debug -->x veder cos ho estratto
+//                    // faccio cose con i dati ottenuto
+//                    System.out.print("ID: " + rs.getInt("id"));
+//                    System.out.print(", Age: " + rs.getInt("age"));
+//                    System.out.print(", First: " + rs.getString("first"));
+//                    System.out.println(", Last: " + rs.getString("last"));
+//                }
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         //UPDATE
         public static void updateInfoDB() {
