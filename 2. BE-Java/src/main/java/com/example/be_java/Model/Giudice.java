@@ -11,7 +11,7 @@ public class Giudice extends Buoni {
         super(nome, isAlive, isProtected);
     }
 
-    public void decidi(){
+    public static void decidi(){
 
     }
 }

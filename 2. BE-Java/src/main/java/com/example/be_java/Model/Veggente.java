@@ -11,7 +11,7 @@ public class Veggente extends Buoni {
         super(nome, isAlive, isProtected);
     }
 
-    public void indaga(){
+    public static void indaga(){
 
     }
 }

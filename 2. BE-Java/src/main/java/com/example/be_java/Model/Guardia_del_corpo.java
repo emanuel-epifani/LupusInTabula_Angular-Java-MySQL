@@ -11,7 +11,8 @@ public class Guardia_del_corpo extends Buoni {
         super(nome, isAlive, isProtected);
     }
 
-    public void proteggi(){
+    public static void proteggi(Personaggio daProteggere){
 
+        daProteggere.setProtected(true);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.be_java.Controller;
 
 import com.example.be_java.Model.*;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,4 +70,13 @@ public class Controller {
     return "ok ";
     }
 
+    @PostMapping ("/Guardia")
+    public void proteggi(@RequestParam (value = "nome") Personaggio protetto) {
+        Guardia_del_corpo.proteggi(protetto);
+
+    }
+    @GetMapping("/Lupo")
+    public void uccidi(@RequestParam (value = "nome") Personaggio divorato){
+        Lupo.uccide(divorato);
+    }
 }

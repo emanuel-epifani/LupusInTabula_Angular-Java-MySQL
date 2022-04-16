@@ -1,4 +1,6 @@
 import com.example.be_java.Model.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,9 +74,22 @@ public class Debug {
             if (Lupo.getCountLupo()>0 && Cattivi.getCountCattivi() < Buoni.getCountBuoni()){
 
                 System.out.println("----------------E' notte---------");
+
                 //la gdc vota chi vuole proteggere casualmente
-                Collections.shuffle(personaggi);
-                personaggi.get(0).setProtected(true);
+                    //se la gda è il mio utente, faccio il metodo @PostMapping
+
+                    //se la gda è il pc, faccio questo
+                        Collections.shuffle(personaggi);
+                        for (Personaggio i : personaggi) {
+                            if (i.isAlive() == true) {
+                                i.setProtected(true);
+                                break;
+                            }
+                        }
+
+
+
+
                 //i lupi scelgono chi uccidere
 
                 //il veggente sceglie chi indagare (se è un lupo)
