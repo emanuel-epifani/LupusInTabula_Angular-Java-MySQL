@@ -1,6 +1,8 @@
 package com.example.be_java.Model;
 
-public class Indemoniato extends Cattivi{
+import com.example.be_java.Model.Cattivi;
+
+public class Indemoniato extends Cattivi {
 
     public Indemoniato() {
     }

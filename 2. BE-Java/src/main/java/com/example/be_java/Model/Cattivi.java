@@ -1,6 +1,6 @@
 package com.example.be_java.Model;
 
-public class Cattivi extends Personaggio{
+public class Cattivi extends Personaggio {
     private static int countCattivi;
 
     public Cattivi() {

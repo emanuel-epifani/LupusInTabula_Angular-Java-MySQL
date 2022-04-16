@@ -4,6 +4,7 @@ public class Personaggio {
     private String nome;
     private boolean isAlive;
     private boolean isProtected;
+    private int votiRicevuti;
 
     public Personaggio(String nome, boolean isAlive, boolean isProtected) {
         this.nome = nome;

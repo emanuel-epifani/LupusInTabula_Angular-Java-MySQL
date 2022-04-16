@@ -1,35 +1,32 @@
 package com.example.be_java.Controller;
 
 import com.example.be_java.Model.*;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
 @RestController
 public class Controller {
 
-    @GetMapping("/iniziaPartita")
-    public static String impostaPersonaggi() {
 
-        Scanner tastiera = new Scanner(System.in);
-
-        System.out.println("Benvenuto, scrivi un nome da assegnare al tuo giocatore");
-        String nometizio = tastiera.nextLine();
-
+    @PostMapping("/StartPartita")
+    public String start(@RequestParam (value = "nome") String nometizio) {
         //Creo un array di personaggi vuoto...
         ArrayList<Personaggio> personaggi = new ArrayList<>();
+
         //... istanzio tutti i personaggi (con nome vuoto)
-        Contadini contadino1 = new Contadini();
-        Contadini contadino2 = new Contadini();
-        Contadini contadino3 = new Contadini();
+        Contadino contadino1 = new Contadino();
+        Contadino contadino2 = new Contadino();
+        Contadino contadino3 = new Contadino();
         Veggente veggente = new Veggente();
         Guardia_del_corpo guardia_del_corpo = new Guardia_del_corpo();
         Giudice giudice = new Giudice();
         Lupo lupo = new Lupo();
         Indemoniato indemoniato = new Indemoniato();
+
         //...e li aggiungo all'array
         personaggi.add(contadino1);
         personaggi.add(contadino2);
@@ -54,26 +51,22 @@ public class Controller {
 
         //mischiamo l'array per garantirmi che ogni nuova volta allo stesso personaggio assegnerò un nome diverso
         Collections.shuffle(nomiPersonaggi);
-        System.out.println(nomiPersonaggi.toString());//x debug
+        //System.out.println(nomiPersonaggi.toString());x debug
 
         //assegno ad ogni personaggio creato (con costruttore vuoto), un nome dall'array mescolato e setto gli altri 2 parametri finora vuoti
-        String personaggioAttribuito = "";
-
         for (int i = 0; i < personaggi.size(); i++) {
             personaggi.get(i).setNome(nomiPersonaggi.get(i));
             personaggi.get(i).setAlive(true);
-            personaggi.get(i).setAlive(false);
+            personaggi.get(i).setProtected(false);
             //System.out.println(personaggi.get(i).getNome());
 
             //all'iterazione in cui assegno il nome inserito dall'utente, ritorno che tipo di personaggio sarà capitato all'utente
             if (nomiPersonaggi.get(i) == nometizio) {
-                //System.out.println("Il personaggio a te assegnato è: "+  personaggi.get(i).getClass().getSimpleName());
-                personaggioAttribuito = personaggi.get(i).getClass().getSimpleName();
+                return personaggi.get(i).getClass().getSimpleName();
             }
         }
-        return personaggioAttribuito;
+
+    return "ok ";
     }
-    //istanzio tutti i personaggi, do loro un nome random, e mi ritorno il tipo di personaggio capitato a me
+
 }
-
-

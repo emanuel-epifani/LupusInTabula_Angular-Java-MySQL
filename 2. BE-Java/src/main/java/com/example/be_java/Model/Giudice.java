@@ -1,6 +1,8 @@
 package com.example.be_java.Model;
 
-public class Giudice extends Buoni{
+import com.example.be_java.Model.Buoni;
+
+public class Giudice extends Buoni {
 
     public Giudice() {
     }

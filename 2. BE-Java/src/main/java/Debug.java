@@ -15,10 +15,11 @@ public class Debug {
 
         //Creo un array di personaggi vuoto...
         ArrayList<Personaggio> personaggi = new ArrayList<>();
+
         //... istanzio tutti i personaggi (con nome vuoto)
-        Contadini contadino1 = new Contadini();
-        Contadini contadino2 = new Contadini();
-        Contadini contadino3 = new Contadini();
+        Contadino contadino1 = new Contadino();
+        Contadino contadino2 = new Contadino();
+        Contadino contadino3 = new Contadino();
         Veggente veggente = new Veggente();
         Guardia_del_corpo guardia_del_corpo = new Guardia_del_corpo();
         Giudice giudice = new Giudice();
@@ -62,6 +63,33 @@ public class Debug {
                 System.out.println("Il personaggio a te assegnato è: "+  personaggi.get(i).getClass().getSimpleName());
             }
         }
+
+
+        // -----------------------------------prova megamain-----------------------------------
+        boolean finito = false;
+
+        while (!finito) {
+            if (Lupo.getCountLupo()>0 && Cattivi.getCountCattivi() < Buoni.getCountBuoni()){
+
+                System.out.println("----------------E' notte---------");
+                //la gdc vota chi vuole proteggere
+                //i lupi scelgono chi uccidere
+                //il veggente sceglie chi indagare (se è un lupo)
+
+
+                System.out.println("----------------E' giorno---------");
+                //printo chi (se) è stato ucciso di notte
+                System.out.println("----------------Votiamo---------");
+                //tutti votano chi uccidere,
+                //ballotaggio se 2 persone = voti, decide il giudice)
+                            //si attiva il metodo del giudice
+                //muore chi è stato deciso
+            }
+        }
+
+
+
+
 
     }
 }
