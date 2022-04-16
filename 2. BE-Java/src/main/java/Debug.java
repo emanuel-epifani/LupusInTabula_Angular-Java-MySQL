@@ -72,8 +72,11 @@ public class Debug {
             if (Lupo.getCountLupo()>0 && Cattivi.getCountCattivi() < Buoni.getCountBuoni()){
 
                 System.out.println("----------------E' notte---------");
-                //la gdc vota chi vuole proteggere
+                //la gdc vota chi vuole proteggere casualmente
+                Collections.shuffle(personaggi);
+                personaggi.get(0).setProtected(true);
                 //i lupi scelgono chi uccidere
+
                 //il veggente sceglie chi indagare (se è un lupo)
 
 
@@ -84,6 +87,17 @@ public class Debug {
                 //ballotaggio se 2 persone = voti, decide il giudice)
                             //si attiva il metodo del giudice
                 //muore chi è stato deciso
+
+                //countLupo--/countBuoni--
+
+            } else {
+                System.out.println("Il gioco è finito");
+                finito = true;
+                if(Lupo.getCountLupo()==0){
+                    System.out.println("Hanno vinto i buoni");
+                }else if (Buoni.getCountBuoni()==Cattivi.getCountCattivi()){
+                    System.out.println("Hanno vinto i cattivi");
+                }
             }
         }
 
