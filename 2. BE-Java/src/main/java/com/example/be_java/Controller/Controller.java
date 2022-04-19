@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -38,7 +39,6 @@ public class Controller {
         personaggi.add(lupo);
         personaggi.add(indemoniato);
 
-
         //Creo un array di nomi di personaggi vuoto, lo riempo con 7nomi a mia scelta + 1preso dall'utente
         ArrayList<String> nomiPersonaggi = new ArrayList<>();
         nomiPersonaggi.add("Sergio");
@@ -67,8 +67,35 @@ public class Controller {
             }
         }
 
-    return "ok ";
+
+        //una volta assegnato ad ogni giocatore un nome e un ruolo, prima di iniziare la partita vera e propria
+        //vado a riempire la tabella del db "personaggi" con i personaggi istanziati, i nomi assegnati, setto tutti vivi
+        final String DB_URL = "jdbc:mysql://localhost:3306/lupus";
+        final String USER = "lupus";
+        final String PASS = "lupus";
+
+        try {
+            //1. apro una connessione col db--> DriverManager.getConnection()
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = null;
+            for (int i = 0; i < personaggi.size(); i++) {
+                String QUERY = "INSERT INTO personaggi (nome, ruolo, isAlive) VALUES (?,?,?)";
+                pstmt = conn.prepareStatement(QUERY);
+                pstmt.setString(1, personaggi.get(i).getNome());//nome personaggio
+                pstmt.setString(2, personaggi.get(i).getClass().getSimpleName());//ruolo personaggio
+                pstmt.setBoolean(3, true);//isAlive
+                pstmt.executeUpdate(QUERY);
+            }
+            pstmt.close(); //chiudo lo statement
+            conn.close(); //chiudo la connessione
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    return "ok";
     }
+
+
 
     @PostMapping ("/Guardia")
     public void proteggi(@RequestParam (value = "nome") Personaggio protetto) {
