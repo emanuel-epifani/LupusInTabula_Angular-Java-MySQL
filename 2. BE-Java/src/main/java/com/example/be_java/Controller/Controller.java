@@ -52,30 +52,27 @@ public class Controller {
 
         //mischiamo l'array per garantirmi che ogni nuova volta allo stesso personaggio assegnerò un nome diverso
         Collections.shuffle(nomiPersonaggi);
-        //System.out.println(nomiPersonaggi.toString());x debug
-
+        String personaggioUtente = "";
         //assegno ad ogni personaggio creato (con costruttore vuoto), un nome dall'array mescolato e setto gli altri 2 parametri finora vuoti
         for (int i = 0; i < personaggi.size(); i++) {
             personaggi.get(i).setNome(nomiPersonaggi.get(i));
             personaggi.get(i).setAlive(true);
             personaggi.get(i).setProtected(false);
-            //System.out.println(personaggi.get(i).getNome());
 
-            //all'iterazione in cui assegno il nome inserito dall'utente, ritorno che tipo di personaggio sarà capitato all'utente
+            //all'iterazione in cui assegno il nome inserito dall'utente, immagazino il tipo di personaggio capitato all'utente
             if (nomiPersonaggi.get(i) == nometizio) {
-                return personaggi.get(i).getClass().getSimpleName();
+                personaggioUtente = personaggi.get(i).getClass().getSimpleName();
             }
         }
 
 
         //una volta assegnato ad ogni giocatore un nome e un ruolo, prima di iniziare la partita vera e propria
-        //vado a riempire la tabella del db "personaggi" con i personaggi istanziati, i nomi assegnati, setto tutti vivi
+        //vado a riempire la tabella del db "personaggi" con i personaggi istanziati, i nomi assegnati, e setto tutti a vivi
         final String DB_URL = "jdbc:mysql://localhost:3306/lupus";
         final String USER = "lupus";
         final String PASS = "lupus";
 
         try {
-            //1. apro una connessione col db--> DriverManager.getConnection()
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             PreparedStatement pstmt = null;
             for (int i = 0; i < personaggi.size(); i++) {
@@ -84,7 +81,7 @@ public class Controller {
                 pstmt.setString(1, personaggi.get(i).getNome());//nome personaggio
                 pstmt.setString(2, personaggi.get(i).getClass().getSimpleName());//ruolo personaggio
                 pstmt.setBoolean(3, true);//isAlive
-                pstmt.executeUpdate(QUERY);
+                pstmt.executeUpdate();
             }
             pstmt.close(); //chiudo lo statement
             conn.close(); //chiudo la connessione
@@ -92,7 +89,7 @@ public class Controller {
             e.printStackTrace();
         }
 
-    return "ok";
+    return personaggioUtente;
     }
 
 
