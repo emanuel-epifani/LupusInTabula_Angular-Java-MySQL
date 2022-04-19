@@ -2,6 +2,10 @@ import com.example.be_java.Model.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -64,6 +68,29 @@ public class Debug {
             if (nomiPersonaggi.get(i) == nometizio){
                 System.out.println("Il personaggio a te assegnato è: "+  personaggi.get(i).getClass().getSimpleName());
             }
+        }
+
+        //vado a riempire la tabella del db "personaggi" con i personaggi istanziati, i nomi assegnati, setto tutti vivi
+        final String DB_URL = "jdbc:mysql://localhost:3306/lupus";
+        final String USER = "lupus";
+        final String PASS = "lupus";
+
+        try {
+            //1. apro una connessione col db--> DriverManager.getConnection()
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = null;
+            for (int i = 0; i < personaggi.size(); i++) {
+                String QUERY = "INSERT INTO personaggi (nome, ruolo, isAlive) VALUE (?, ?, ?)";
+                pstmt = conn.prepareStatement(QUERY);
+                pstmt.setString(1, personaggi.get(i).getNome());//nome personaggio
+                pstmt.setString(2, personaggi.get(i).getClass().getSimpleName());//ruolo personaggio
+                pstmt.setBoolean(3, true);//isAlive
+                pstmt.executeUpdate();
+            }
+            pstmt.close(); //chiudo lo statement
+            conn.close(); //chiudo la connessione
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
 
