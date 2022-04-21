@@ -16,6 +16,29 @@ public class Controller {
 
     @PostMapping("/StartPartita")
     public String start(@RequestParam (value = "nome") String nometizio) {
+      //controllo sul db l'id della partita e se presente immagazzino il valore in una variabile
+        final String DB_URL = "jdbc:mysql://localhost:3306/lupus";
+        final String USER = "lupus";
+        final String PASS = "lupus";
+
+        // Open a connection
+        try(
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement stmt = conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery("SELECT id FROM personaggi WHERE finito ==false");
+        ) {
+            while(rs.next()){
+                rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        //prendi id dal database
+
+
         //Creo un array di personaggi vuoto...
         ArrayList<Personaggio> personaggi = new ArrayList<>();
 
@@ -68,9 +91,7 @@ public class Controller {
 
         //una volta assegnato ad ogni giocatore un nome e un ruolo, prima di iniziare la partita vera e propria
         //vado a riempire la tabella del db "personaggi" con i personaggi istanziati, i nomi assegnati, e setto tutti a vivi
-        final String DB_URL = "jdbc:mysql://localhost:3306/lupus";
-        final String USER = "lupus";
-        final String PASS = "lupus";
+
 
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -92,7 +113,14 @@ public class Controller {
     return personaggioUtente;
     }
 
+@PostMapping("/usaPotere")
+public void usaPotere(@RequestParam (value = "ruolo") String  personaggioUtente){
+        switch (personaggioUtente) {
+            case "contadino":
 
+            case "lupo":
+        }
+}
 
     @PostMapping ("/Guardia")
     public void proteggi(@RequestParam (value = "nome") Personaggio protetto) {
