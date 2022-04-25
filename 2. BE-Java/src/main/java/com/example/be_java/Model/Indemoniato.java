@@ -8,6 +8,6 @@ public class Indemoniato extends Cattivi {
     }
 
     public Indemoniato(String nome, boolean isAlive, boolean isProtected) {
-        super(nome, isAlive, isProtected);
+        super(nome,"Indemoniato", isAlive, isProtected);
     }
 }

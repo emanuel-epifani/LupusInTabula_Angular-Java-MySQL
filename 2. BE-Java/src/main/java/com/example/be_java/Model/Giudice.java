@@ -8,7 +8,7 @@ public class Giudice extends Buoni {
     }
 
     public Giudice(String nome, boolean isAlive, boolean isProtected) {
-        super(nome, isAlive, isProtected);
+        super(nome,"Giudice", isAlive, isProtected);
     }
 
     public static void decidi(){

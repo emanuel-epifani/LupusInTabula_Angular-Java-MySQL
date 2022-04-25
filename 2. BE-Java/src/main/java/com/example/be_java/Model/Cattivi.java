@@ -6,8 +6,8 @@ public class Cattivi extends Personaggio {
     public Cattivi() {
     }
 
-    public Cattivi(String nome, boolean isAlive, boolean isProtected) {
-        super(nome, isAlive, isProtected);
+    public Cattivi(String nome, String ruolo, boolean isAlive, boolean isProtected) {
+        super(nome, ruolo, isAlive, isProtected, );
         countCattivi++;
     }
 

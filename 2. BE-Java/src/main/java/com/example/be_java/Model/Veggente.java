@@ -8,7 +8,7 @@ public class Veggente extends Buoni {
     }
 
     public Veggente(String nome, boolean isAlive, boolean isProtected) {
-        super(nome, isAlive, isProtected);
+        super(nome,"veggente", isAlive, isProtected);
     }
 
     public static void indaga(){

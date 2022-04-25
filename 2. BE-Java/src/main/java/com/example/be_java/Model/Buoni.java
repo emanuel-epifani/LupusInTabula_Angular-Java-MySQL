@@ -4,8 +4,8 @@ public class Buoni extends Personaggio {
     private static int countBuoni;
 
 
-    public Buoni(String nome, boolean isAlive, boolean isProtected) {
-        super(nome, isAlive, isProtected);
+    public Buoni(String nome, String ruolo, boolean isAlive, boolean isProtected) {
+        super(nome, ruolo, isAlive, isProtected, );
         countBuoni++;
     }
 

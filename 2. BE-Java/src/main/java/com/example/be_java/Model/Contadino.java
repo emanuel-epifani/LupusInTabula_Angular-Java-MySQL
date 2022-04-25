@@ -7,7 +7,7 @@ public class Contadino extends Buoni{
     }
 
     public Contadino(String nome, boolean isAlive, boolean isProtected) {
-        super(nome, isAlive, isProtected);
+        super(nome,"Contadino", isAlive, isProtected);
     }
 
 

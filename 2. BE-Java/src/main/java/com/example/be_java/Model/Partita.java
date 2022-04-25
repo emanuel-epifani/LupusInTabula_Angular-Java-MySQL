@@ -2,6 +2,7 @@ package com.example.be_java.Model;
 
 public class Partita {
     private static int id;
+    private boolean finto;
 
     public Partita() {
         id++;
@@ -11,7 +12,4 @@ public class Partita {
         return id;
     }
 
-    public static void setId(int id) {
-        Partita.id = id;
-    }
 }

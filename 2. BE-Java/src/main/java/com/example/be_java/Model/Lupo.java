@@ -7,7 +7,7 @@ public class Lupo extends Cattivi {
     }
 
     public Lupo(String nome, boolean isAlive, boolean isProtected) {
-        super(nome, isAlive, isProtected);
+        super(nome,"Lupo", isAlive, isProtected);
         setCountCattivi(+1);
         countLupo++;
     }
