@@ -1,5 +1,6 @@
 package com.example.be_java.Controller;
 
+import com.example.be_java.Model.Partita;
 import com.example.be_java.Model.Personaggio;
 import com.example.be_java.Model.repository.StartRepository;
 import com.example.be_java.Model.repository.UsaPotereRepository;
@@ -13,13 +14,10 @@ import java.util.ArrayList;
 @RestController
 public class Controller {
 
-
-
     @PostMapping("/StartPartita")
-    public String startPost(@RequestParam(value = "nome") String nometizio) {
+    public Partita startPost(@RequestParam(value = "nome") String nometizio) {
         //ho solo spostato tutto il metodo in startRepository nel model per maggore chiarezza
         return StartRepository.start(nometizio);
-
     }
 
     //postmapping per la notte fa usare i poteri alle persone
@@ -29,7 +27,6 @@ public class Controller {
             @RequestParam(value = "id_partita") int id_partita,
             @RequestParam (value = "nome") String bersagioPotere
     ) {
-        //faccio la stessa cosa qui creando il metodo nel repository
         return UsaPotereRepository.usapotere(id_partita, ruoloUtente, bersagioPotere);
     }
 

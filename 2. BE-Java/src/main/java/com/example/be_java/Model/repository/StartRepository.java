@@ -12,12 +12,22 @@ import static com.example.be_java.Model.Constants.DBconnection.*;
 
 public class StartRepository {
 
-
-    public static String start(String nometizio) {
+    /**
+     -	Prendo in input il nome da attribuire al personaggio.
+     -	Istanzio una nuova partita (e gli assegno un nuovo id).
+     -	connToDb e scrivo nella tabella “partite” del db l’id della partita e imposto “finito” a false.
+     -	Creo un array di Personaggi vuoto.
+     -	Istanzio 8 personaggi e li aggiungo all’array
+     -	Creo un arraylisti di nomiPersonaggi e ci aggiungo 8 nomi (7 mockati nel codice e l’8 quello preso in input dall’utente)
+     -	Mischio l’array di nomi e assegno ad ogni personaggio creato un nome dall’array nomiPersonaggi.
+     -	connToDb e vado a riempire la tabella del db “personaggi” con i personaggi istanziati, i nomi assegnati, e setto tutti a vivi.
+     * @param nometizio
+     * @return
+     */
+    public static Partita start(String nometizio) {
 
         //creo una nuova partita facendo cosi aumentarel'id
         Partita partita = new Partita();
-
         //inoltre scrivo nella tabella partite il nuovo id e imposto finito a false
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -39,6 +49,7 @@ public class StartRepository {
 
         //Creo un array di personaggi vuoto...
         ArrayList<Personaggio> personaggi = new ArrayList<>();
+
 
         //... istanzio tutti i personaggi (con nome vuoto)
         Contadino contadino1 = new Contadino();
@@ -109,6 +120,14 @@ public class StartRepository {
             e.printStackTrace();
         }
 
-        return personaggioUtente;
+
+//        ArrayList<infoPartita> infoThisPartita = new ArrayList<>();
+//        Contadino contadino1 = new Contadino();
+//        Contadino contadino1 = new Contadino();
+//        personaggi.add(contadino1);
+
+        partita.setPersonaggioUtente(personaggioUtente);
+
+        return partita;
     }
 }
