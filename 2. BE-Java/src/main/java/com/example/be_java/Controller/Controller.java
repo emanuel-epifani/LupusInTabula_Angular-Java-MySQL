@@ -1,5 +1,6 @@
 package com.example.be_java.Controller;
 
+import com.example.be_java.Model.EsitoNotte;
 import com.example.be_java.Model.Partita;
 import com.example.be_java.Model.Personaggio;
 import com.example.be_java.Model.repository.StartRepository;
@@ -20,9 +21,9 @@ public class Controller {
         return StartRepository.start(nometizio);
     }
 
-    //postmapping per la notte fa usare i poteri alle persone
+    //NOTTE - fa usare i poteri alle persone
     @PostMapping("/usaPotere")
-    public String usaPotere(
+    public EsitoNotte usaPotere(
             @RequestParam (value = "ruolo") String  ruoloUtente,
             @RequestParam(value = "id_partita") int id_partita,
             @RequestParam (value = "nome") String bersagioPotere

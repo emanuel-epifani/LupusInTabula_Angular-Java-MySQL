@@ -1,5 +1,6 @@
 package com.example.be_java.Model.repository;
 
+import com.example.be_java.Model.EsitoNotte;
 import com.example.be_java.Model.Personaggio;
 
 import java.sql.*;
@@ -44,93 +45,61 @@ public class UsaPotereRepository {
     //----------------------------------------------------nuovo metodo----------------------------------------
 
     //creo un metodo per usare i poteri , gli passo il ruolo del giocatore umano e il nome di chi lui ha scelto per usare il suo potere
-    public static String usapotere(int id_partita, String ruolo, String nome){
+    public static EsitoNotte usapotere(int id_partita, String ruolo, String nome){
 
         //richiamo il metodo personaggi per poter integrare il metodo di usapotere che avevamo scritto in debug2
         ArrayList<Personaggio> personaggi=  getPersonaggiVivi(id_partita);
-
         //creo una variabile da utilizzare nel caso del veggente
-        String indagato= "Fine";
 
+        //istanzio l'oggetto esitoNotte vuoto (contenente morto="" e indagato="", per restituirlo a fine metodo una volta riempito
+        EsitoNotte esitoNotte = new EsitoNotte();
 
         switch (ruolo){
 
             case "Guardia_del_corpo":
-
-
+                //a quello scelto setto protected a true
                 for (int i = 0; i < personaggi.size() ; i++) {
                     if (personaggi.get(i).getNome().equalsIgnoreCase(nome) ){
                         personaggi.get(i).setProtected(true);
                     }
                 }
-
-                //faccio uccidere randomicamente
+                //faccio uccidere randomicamente 1 personaggio
                 Collections.shuffle(personaggi);
                 if (personaggi.get(0).isAlive() && personaggi.get(0).isProtected()==false){
                     personaggi.get(0).setAlive(false);
                 }
-
-
-
                 break;
             case"Lupo":
-
                 //faccio fare randomicamente la protezione alla guardia del corpo
-                Collections.shuffle(personaggi); //nel vero codice tanto ci sarà una select dal DB
-
+                Collections.shuffle(personaggi);
                 personaggi.get(0).setProtected(true);
-
-
-
                 //faccio agire il lupo
-
-
-
                 for (int i = 0; i < personaggi.size() ; i++) {
-
                     if (personaggi.get(i).getNome().equalsIgnoreCase(nome) && personaggi.get(i).isProtected()==false ){
                         personaggi.get(i).setAlive(false);
-
                     }
-
                 }
-
-
-
                 break;
-
             case "Veggente":
                 //faccio fare randomicamente la protezione alla guardia del corpo
-                Collections.shuffle(personaggi); //nel vero codice tanto ci sarà una select dal DB
-
-
+                Collections.shuffle(personaggi);
                     personaggi.get(0).setProtected(true);
-
-
                 //faccio uccidere randomicamente
                 Collections.shuffle(personaggi);
                 if ( personaggi.get(0).isProtected()==false){
-
                     personaggi.get(0).setAlive(false);
                 }
-
                 //faccio agire il veggente
-
                 for (int i = 0; i < personaggi.size() ; i++) {
-
                     if (personaggi.get(i).getNome().equalsIgnoreCase(nome) ){
-
                         if(personaggi.get(i).getRuolo().equalsIgnoreCase("Lupo"))
-                           indagato= nome+ " è il lupo";
-
+                           esitoNotte.setIndagato(nome);
                     }
                 }
-
                 break;
-
         }
-        String morto="";
 
+        String morto="";
         for (int i = 0; i < personaggi.size() ; i++) {
             if(personaggi.get(i).isAlive()==false){
                 morto= personaggi.get(i).getNome();
@@ -138,9 +107,7 @@ public class UsaPotereRepository {
         }
 
         //segno il morto nel database se c'è
-
         if(!morto.equalsIgnoreCase("")) {
-
             try {
                 Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 PreparedStatement pstmt = null;
@@ -149,7 +116,6 @@ public class UsaPotereRepository {
                     pstmt = conn.prepareStatement(QUERY);
                     pstmt.setString(1, morto);//nome personaggio
                     pstmt.setInt(2, id_partita);
-
                     pstmt.executeUpdate();
                 }
                 pstmt.close(); //chiudo lo statement
@@ -160,8 +126,8 @@ public class UsaPotereRepository {
         }
 
 
-
-//verrà gestito dal front end il fatto di visualizzare il messaggio
-        return indagato;
+        //l'indagato servirà al FE  (se l'utente è il veggnete) per ricordarsi chi votare/non votare al GIORNO successivo
+        // l'(eventuale) morto, servirà al FE per far sapere all'utente il punto della situazione ad inizio GIORNO
+        return esitoNotte;
     }
 }
