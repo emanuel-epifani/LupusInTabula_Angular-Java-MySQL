@@ -1,0 +1,14 @@
+<p>notte works!</p>
+
+
+<!------------- se: Guardia del corpo/ Lupo / Veggente ------------->
+<div *ngIf="ruoloUtente =='lupo' ">
+  <p>Sei il LUPO</p>
+  <p>Chi vuoi UCCIDERE?</p>
+  <div *ngFor="let item of personaggiVivi">
+    <input type="radio" name="" id="">{item}<br>
+  </div>
+
+</div>
+
+<!------------- se: Contadino / Indemoniato ------------>
