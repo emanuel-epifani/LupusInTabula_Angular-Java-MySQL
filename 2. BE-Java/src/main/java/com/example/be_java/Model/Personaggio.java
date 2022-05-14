@@ -5,11 +5,10 @@ public class Personaggio {
     private String ruolo;
     private boolean isAlive;
     private boolean isProtected;
-    private int id_partita;
     private int votiRicevuti;
 
-    public Personaggio(String nome, String ruolo, boolean isAlive, boolean isProtected, int id_partita) {
-        this.id_partita=id_partita;
+    public Personaggio(String nome, String ruolo, boolean isAlive, boolean isProtected ) {
+
         this.ruolo=ruolo;
         this.nome = nome;
         this.isAlive = isAlive;

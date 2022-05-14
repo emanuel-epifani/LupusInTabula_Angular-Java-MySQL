@@ -12,14 +12,14 @@ import static com.example.be_java.Model.Constants.DBconnection.*;
 public class UsaPotereRepository {
 
     //creo un metodo per ottenere il nostro array di personaggi da richiamare nelgi altri metodi
-    public static ArrayList<Personaggio> getPersonaggiVivi(int id_partita){
+    public static ArrayList<Personaggio> getPersonaggiVivi(){
         ArrayList<Personaggio> personaggi = new ArrayList<>();
 
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            String QUERY = "Select * from personaggi where isAlive==true and id_partita==?";
+            String QUERY = "Select * from personaggi where isAlive==true ";
             PreparedStatement pstmt = conn.prepareStatement(QUERY);
-            pstmt.setInt(1, id_partita);
+
             ResultSet rs =pstmt.executeQuery(QUERY);
 
 
@@ -27,8 +27,8 @@ public class UsaPotereRepository {
                 Personaggio giocatore=new Personaggio(rs.getString("nome"),
                         rs.getString("ruolo"),
                         rs.getBoolean("isAlive"),
-                        false,
-                        rs.getInt("id_partita"));
+                        false
+                        );
                 personaggi.add(giocatore);
 
             }
@@ -45,10 +45,10 @@ public class UsaPotereRepository {
     //----------------------------------------------------nuovo metodo----------------------------------------
 
     //creo un metodo per usare i poteri , gli passo il ruolo del giocatore umano e il nome di chi lui ha scelto per usare il suo potere
-    public static EsitoNotte usapotere(int id_partita, String ruolo, String nome){
+    public static EsitoNotte usapotere( String ruolo, String nome){
 
         //richiamo il metodo personaggi per poter integrare il metodo di usapotere che avevamo scritto in debug2
-        ArrayList<Personaggio> personaggi=  getPersonaggiVivi(id_partita);
+        ArrayList<Personaggio> personaggi=  getPersonaggiVivi();
         //creo una variabile da utilizzare nel caso del veggente
 
         //istanzio l'oggetto esitoNotte vuoto (contenente morto="" e indagato="", per restituirlo a fine metodo una volta riempito
@@ -112,10 +112,10 @@ public class UsaPotereRepository {
                 Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 PreparedStatement pstmt = null;
                 for (int i = 0; i < personaggi.size(); i++) {
-                    String QUERY = "UPDATE personaggi isAlive=false where nome==? and id_partita==?";
+                    String QUERY = "UPDATE personaggi isAlive=false where nome==? ";
                     pstmt = conn.prepareStatement(QUERY);
                     pstmt.setString(1, morto);//nome personaggio
-                    pstmt.setInt(2, id_partita);
+
                     pstmt.executeUpdate();
                 }
                 pstmt.close(); //chiudo lo statement

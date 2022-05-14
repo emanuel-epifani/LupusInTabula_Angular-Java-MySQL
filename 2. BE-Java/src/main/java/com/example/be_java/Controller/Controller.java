@@ -1,10 +1,13 @@
 package com.example.be_java.Controller;
 
 import com.example.be_java.Model.EsitoNotte;
+import com.example.be_java.Model.OutputStart;
 import com.example.be_java.Model.Partita;
 import com.example.be_java.Model.Personaggio;
+import com.example.be_java.Model.repository.EseguiNotteRepository;
 import com.example.be_java.Model.repository.StartRepository;
 import com.example.be_java.Model.repository.UsaPotereRepository;
+import com.example.be_java.Model.repository.VotaRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +19,7 @@ import java.util.ArrayList;
 public class Controller {
 
     @PostMapping("/StartPartita")
-    public Partita startPost(@RequestParam(value = "nome") String nometizio) {
+    public OutputStart startPost(@RequestParam(value = "nome") String nometizio) {
         //ho solo spostato tutto il metodo in startRepository nel model per maggore chiarezza
         return StartRepository.start(nometizio);
     }
@@ -25,15 +28,28 @@ public class Controller {
     @PostMapping("/usaPotere")
     public EsitoNotte usaPotere(
             @RequestParam (value = "ruolo") String  ruoloUtente,
-            @RequestParam(value = "id_partita") int id_partita,
             @RequestParam (value = "nome") String bersagioPotere
     ) {
-        return UsaPotereRepository.usapotere(id_partita, ruoloUtente, bersagioPotere);
+        return UsaPotereRepository.usapotere( ruoloUtente, bersagioPotere);
     }
 
     @GetMapping ("/getVivi")
-    public ArrayList<Personaggio> getVivi(@RequestParam(value = "id_partita") int id_partita){
-        return UsaPotereRepository.getPersonaggiVivi(id_partita);
+    public ArrayList<Personaggio> getVivi(){
+        return UsaPotereRepository.getPersonaggiVivi();
     }
+
+    @GetMapping ("/eseguiNotte")
+    public EsitoNotte eseguiNotte(){
+        return EseguiNotteRepository.esegui();
+    }
+
+    @PostMapping("/vota")
+    public String vota(@RequestParam(value = "bersagio") String bersagio) {
+        //ho solo spostato tutto il metodo in startRepository nel model per maggore chiarezza
+        return VotaRepository.vota(bersagio);
+    }
+
+
+
 
 }

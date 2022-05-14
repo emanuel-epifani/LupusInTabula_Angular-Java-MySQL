@@ -8,7 +8,7 @@ public class Buoni extends Personaggio {
     }
 
     public Buoni(String nome, String ruolo, boolean isAlive, boolean isProtected) {
-        super(nome, ruolo, isAlive, isProtected, countBuoni);
+        super(nome, ruolo, isAlive, isProtected);
         countBuoni++;
     }
 
