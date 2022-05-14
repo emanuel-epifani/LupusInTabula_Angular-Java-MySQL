@@ -16,13 +16,4 @@ public class Lupo extends Cattivi {
         return countLupo;
     }
 
-    public static void setCountLupo(int countLupo) {
-        Lupo.countLupo = countLupo;
-    }
-
-    public static void uccide(Personaggio divorato){
-        if(divorato.isProtected()==false) {
-            divorato.setAlive(false);
-        }
-    }
 }

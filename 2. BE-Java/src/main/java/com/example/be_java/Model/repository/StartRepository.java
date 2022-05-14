@@ -26,27 +26,8 @@ public class StartRepository {
      * @param nometizio
      * @return Partita (idPartita, finito, personaggioUtente)
      */
-    public static Partita start(String nometizio) {
+    public static OutputStart start(String nometizio) {
 
-        //creo una nuova partita facendo cosi aumentarel'id
-        Partita partita = new Partita();
-        //inoltre scrivo nella tabella partite il nuovo id e imposto finito a false
-        try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            PreparedStatement pstmt = null;
-
-                String QUERY = "INSERT INTO partite (nome, finito) VALUES (?,false)";
-                pstmt = conn.prepareStatement(QUERY);
-                pstmt.setInt(1,Partita.getId());//nome personaggio
-                pstmt.executeUpdate();
-
-            pstmt.close(); //chiudo lo statement
-            conn.close(); //chiudo la connessione
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        //prendi id dal database
 
 
         //Creo un array di personaggi vuoto...
@@ -99,29 +80,21 @@ public class StartRepository {
             }
         }
 
-        //una volta assegnato ad ogni giocatore un nome e un ruolo, prima di iniziare la partita vera e propria
-        //vado a riempire la tabella del db "personaggi" con i personaggi istanziati, i nomi assegnati, e setto tutti a vivi
-        System.out.println("riga prima del try-catch");
 
+        PreparedStatement pstmt =null;
         try {
+
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            PreparedStatement pstmt = null;
 
-            //debug
-            System.out.println("dentro il try");
-            System.out.println("dentro il for");
-
-
-            for (int i = 0; i < personaggi.size(); i++) {
-                String QUERY = "INSERT INTO personaggi (id_partita, nome, ruolo, isAlive, isProtected) VALUES (?,?,?,?,?)";
+           for (int i = 0; i < personaggi.size(); i++) {
+                String QUERY = "INSERT INTO personaggi ( nome, ruolo, isalive) VALUES (?,?,?)";
                 pstmt = conn.prepareStatement(QUERY);
-                pstmt.setInt(1,Partita.getId());
-                pstmt.setString(2, personaggi.get(i).getNome());//nome personaggio
-                pstmt.setString(3, personaggi.get(i).getClass().getSimpleName());//ruolo personaggio
-                pstmt.setBoolean(4, true);//isAlive
-                pstmt.setBoolean(5, false);//isProtected
+
+                pstmt.setString(1, personaggi.get(0).getNome());//nome personaggio
+                pstmt.setString(2, personaggi.get(0).getClass().getSimpleName());//ruolo personaggio
+                pstmt.setBoolean(3, true);//isAlive
+
                 pstmt.executeUpdate(QUERY);
-                System.out.println("dentro il for");
 
             }
             pstmt.close(); //chiudo lo statement
@@ -134,15 +107,9 @@ public class StartRepository {
             e.printStackTrace();
         }
 
+        OutputStart output =new OutputStart(personaggioUtente,personaggi);
 
-        partita.setPersonaggioUtente(personaggioUtente);
-
-        //x debug
-        System.out.println(partita.getPersonaggioUtente());
-        System.out.println(partita.isFinito());
-        System.out.println(partita.getId());
-
-        return partita;
+        return output;
         //cioè mi ritornerà (idPartita, finito, ruoloUtente)
     }
 }
