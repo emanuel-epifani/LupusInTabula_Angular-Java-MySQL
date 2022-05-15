@@ -1,4 +1,10 @@
 
+export interface StartPartita {
+  ruolo?: String,
+  personaggi?: Personaggio[]
+}
+
+
 export interface Personaggio {
   nome: String,
   ruolo: String,
@@ -6,11 +12,7 @@ export interface Personaggio {
 }
 
 export interface EsitoNotte {
-  morto?: String,
-  indagato?: String
+  morto?: string,
+  indagato?: string
 }
 
-export interface StartPartita {
-  ruolo?: String,
-  personaggi?: Personaggio[]
-}
