@@ -5,7 +5,7 @@
     <h1>BENVENUTO, INIZIA LA PARTITA</h1>
     <p>Scegli il nome da assegnare al tuo personaggio</p>
     <input type="text" #nomeUtente style="margin-right: 20px;">
-    <button (click)="startPartita(nomeUtente.value)">Inizia la partita</button>
+    <a routerLink="/notte" (click)="startPartita(nomeUtente.value)">Inizia la partita</a>
   </div>
 
 </div>

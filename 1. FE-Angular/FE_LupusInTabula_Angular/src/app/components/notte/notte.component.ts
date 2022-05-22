@@ -10,6 +10,7 @@ import { PartitaService } from 'src/app/services/partita.service';
 })
 export class NotteComponent implements OnInit {
 ruoloUtente = this.partita.ruoloUtente
+nomeUtente?: string = this.partita.nomeUtente
 personaggiVivi?: Personaggio[] = this.partita.personaggiVivi
 //voto utente
 bersaglio =""
@@ -18,7 +19,7 @@ morto? : string= ""
 indagato?: string = ""
 //x mostrare o meno la view con il risultato della votazione post "click"
 esitoNotte?: boolean
-
+//rotte
 router: any;
   
 

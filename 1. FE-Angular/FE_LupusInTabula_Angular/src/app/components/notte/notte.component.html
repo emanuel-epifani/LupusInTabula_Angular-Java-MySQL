@@ -2,11 +2,11 @@
 
 <!------------- se: Lupo / Guardia del corpo / Veggente ------------->
 <!-- Lupo --> 
-<div *ngIf="ruoloUtente =='lupo' " class="form">
+<div *ngIf="ruoloUtente =='Lupo' " class="form">
     <p>Sei il LUPO</p>
     <p>Chi vuoi UCCIDERE?</p>
     <div *ngFor="let item of personaggiVivi">
-      <input type="radio" name="personaggio" (click)="bersaglio==item.nome">{{item.nome}}
+      <input type="radio" name="personaggio" (click)="bersaglio==item.nome" *ngIf="item.nome!=nomeUtente">{{item.nome}}
     </div><br>
     <button type="submit" (click)="usaPotere(ruoloUtente, bersaglio)">Invia voto</button>
   </div>
@@ -22,11 +22,11 @@
   
 
 <!-- Guardia del corpo -->
-  <div *ngIf="ruoloUtente =='guardia del corpo' " class="form">
+  <div *ngIf="ruoloUtente =='Guardia_del_corpo' " class="form">
     <p>Sei la Guardia del corpo</p>
     <p>Chi vuoi PROTEGGERE?</p>
     <div *ngFor="let item of personaggiVivi">
-      <input type="radio" name="personaggio" (click)="bersaglio==item.nome">{{item.nome}}
+      <input type="radio" name="personaggio" (click)="bersaglio==item.nome" *ngIf="item.nome!=nomeUtente">{{item.nome}}
     </div><br>
     <button type="submit" (click)="usaPotere(ruoloUtente, bersaglio)">Invia voto</button>
   </div>
@@ -42,11 +42,11 @@
 
 
 <!-- Veggente -->
-  <div *ngIf="ruoloUtente =='veggente' " class="form">
+  <div *ngIf="ruoloUtente =='Veggente' " class="form">
     <p>Sei il VEGGENTE</p>
     <p>Chi vuoi INDAGARE?</p>
     <div *ngFor="let item of personaggiVivi">
-      <input type="radio" name="personaggio" (click)="bersaglio==item.nome">{{item.nome}}
+      <input type="radio" name="personaggio" (click)="bersaglio==item.nome" *ngIf="item.nome!=nomeUtente">{{item.nome}}
     </div><br>
     <button type="submit" (click)="usaPotere(ruoloUtente, bersaglio)">Invia voto</button>
   </div>
@@ -69,7 +69,7 @@
 
 
 <!------------- se: Contadino / Indemoniato ------------>
-  <div *ngIf="ruoloUtente =='contadino' " class="form">
+  <div *ngIf="ruoloUtente =='Contadino' " class="form">
     <p>Sta avvenendo la votazione, tieni ancora gli occhi chiusi...</p>
     <!-- se morto qualcuno -> dico che è stato ucciso il morto -->
     <p *ngIf="morto!=''">E' stato ucciso {{morto}}</p>
@@ -77,7 +77,7 @@
     <p *ngIf="morto==''">Non è stato ucciso nessuno, la guardia del corpo è riuscita a proteggere il bersaglio del lupo</p>
   </div>
 
-  <div *ngIf="ruoloUtente =='indemoniato' " class="form">
+  <div *ngIf="ruoloUtente =='Indemoniato' " class="form">
     <p>Sta avvenendo la votazione, tieni ancora gli occhi chiusi...</p>
     <!-- se morto qualcuno -> dico che è stato ucciso il morto -->
     <p *ngIf="morto!=''">E' stato ucciso {{morto}}</p>

@@ -23,6 +23,7 @@ export class StartPartitaComponent implements OnInit {
 
   startPartita(nomeUtente: string) {
     return this.partita.startPartita(nomeUtente).subscribe( response => {
+      this.partita.nomeUtente = nomeUtente
       this.partita.ruoloUtente = response.ruolo
       this.partita.personaggiVivi = response.personaggi
       this.router.navigateByUrl('notte');
