@@ -39,25 +39,30 @@ public class EseguiNotteRepository {
 
 
         String morto="";
+
         for (int i = 0; i < personaggi.size() ; i++) {
             if(personaggi.get(i).isAlive()==false){
                 morto= personaggi.get(i).getNome();
             }
         }
 
+        esitoNotte.setMorto(morto);
+        esitoNotte.setIndagato("");
+
         //segno il morto nel database se c'è
         if(!morto.equalsIgnoreCase("")) {
             try {
                 Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                PreparedStatement pstmt = null;
+
                 for (int i = 0; i < personaggi.size(); i++) {
-                    String QUERY = "UPDATE personaggi isAlive=false where nome==? ";
-                    pstmt = conn.prepareStatement(QUERY);
+                    String QUERY = "UPDATE personaggi isAlive=false where nome == ? ";
+                   PreparedStatement pstmt = conn.prepareStatement(QUERY);
                     pstmt.setString(1, morto);//nome personaggio
 
                     pstmt.executeUpdate();
+                    pstmt.close(); //chiudo lo statement
+
                 }
-                pstmt.close(); //chiudo lo statement
                 conn.close(); //chiudo la connessione
             } catch (SQLException e) {
                 e.printStackTrace();
