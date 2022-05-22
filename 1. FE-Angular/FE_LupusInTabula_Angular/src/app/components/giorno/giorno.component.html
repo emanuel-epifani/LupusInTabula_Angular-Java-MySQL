@@ -1,1 +1,18 @@
-<p>giorno works!</p>
+<div class="backgroundImg">
+
+  <div *ngIf="ruoloUtente=='contadino'||'veggente'||'guardia del corpo'" class="form">
+    <p>Chi secondo te è il LUPO?</p>
+    <div *ngFor="let item of personaggiVivi">
+      <div *ngIf="item.ruolo!=ruoloUtente">
+      <input type="radio" name="personaggio" (click)="bersaglio==item.nome" >{{item.nome}}
+      </div>
+    </div><br>
+    <button type="submit" (click)="vota(bersaglio)">Invia voto</button>
+  </div>
+
+  <div *ngIf="ruoloUtente=='contadino'||'veggente'||'guardia del corpo'">
+
+  </div>
+
+
+</div>

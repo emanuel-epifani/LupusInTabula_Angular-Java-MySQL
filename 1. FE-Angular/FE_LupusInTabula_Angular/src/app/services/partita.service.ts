@@ -9,24 +9,25 @@ import { EsitoNotte, Personaggio, StartPartita } from '../models/models';
 
 export class PartitaService {
   partitaFinita = false
-  ruoloUtente = ""
-  personaggiVivi: Personaggio[] = [] //array di oggetti
-  nomiPersonaggiVivi: String[] = [] //array di nomi
-
+  ruoloUtente = "contadino"
+  personaggiVivi?: Personaggio[] = [] //array di oggetti (TIPO di personaggio)
+  morto = ''
+  indagato = ""
+  
   constructor(
     private http: HttpClient
   ) { }
 
   /** - invio il NOME dell'utente
    * - return RUOLO che gli è capitato e ARRAY di PERSONAGGI*/
-  startPartita(nomeUtente: String): Observable<StartPartita> {
+  startPartita(nomeUtente: string): Observable<StartPartita> {
     return this.http.post<StartPartita>('api/contacts', nomeUtente);
   }
 
   /** Notte: se sono: Lupo / Guardia del corpo / Veggente:
    * - passo il mio RUOLO e il GIOCATORE INDICATO
    * - return (eventuale) MORTO ed (eventuale) INDAGATO*/
-  usaPotere(mioRuolo: String, giocatoreIndicato: String) : Observable<EsitoNotte> {
+  usaPotere(mioRuolo: string, giocatoreIndicato: string) : Observable<EsitoNotte> {
     return this.http.get<EsitoNotte>('api/contacts');
   }
 
@@ -39,8 +40,8 @@ export class PartitaService {
 
   /** Giorno:
    * - return: MORTO */
-  vota(personaVotata : String) :Observable<String> {
-    return this.http.post<String>('api/contacts',personaVotata);
+  vota(personaVotata : string) :Observable<string> {
+    return this.http.post<string>('api/contacts',personaVotata);
   }
 
 

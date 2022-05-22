@@ -1,42 +1,89 @@
+<div class="backgroundImg">
 
 <!------------- se: Lupo / Guardia del corpo / Veggente ------------->
-<div *ngIf="ruoloUtente =='lupo' ">
-  <p>Sei il LUPO</p>
-  <p>Chi vuoi UCCIDERE?</p>
-  <div *ngFor="let item of arrayProva">
-    <input type="radio" name="personaggio" #{item}>{{item}}<br>
+<!-- Lupo --> 
+<div *ngIf="ruoloUtente =='lupo' " class="form">
+    <p>Sei il LUPO</p>
+    <p>Chi vuoi UCCIDERE?</p>
+    <div *ngFor="let item of personaggiVivi">
+      <input type="radio" name="personaggio" (click)="bersaglio==item.nome">{{item.nome}}
+    </div><br>
+    <button type="submit" (click)="usaPotere(ruoloUtente, bersaglio)">Invia voto</button>
   </div>
-  <button type="submit" (click)="usaPotere(ruoloUtente,ruoloUtente)">Invia voto</button>
-</div>
-
-<div *ngIf="ruoloUtente =='lupo' ">
-  <p>Sei il LUPO</p>
-  <p>Chi vuoi UCCIDERE?</p>
-  <div *ngFor="let item of arrayProva">
-    <input type="radio" name="personaggio" #{item}>{{item}}<br>
+  <!-- risultato votazione notte -->
+  <div *ngIf="esitoNotte == true">
+    <div *ngIf="morto!=''">
+      <p>Sei riuscito ad uccidere {{morto}}</p>
+    </div>
+    <div *ngIf="morto==''">
+      <p>Non riuscito ad uccidere {{morto}}, la guardia del corpo l'ha protetto</p>
+    </div>
   </div>
-  <button type="submit">Invia voto</button>
-</div>
+  
 
-<div *ngIf="ruoloUtente =='lupo' ">
-  <p>Sei il LUPO</p>
-  <p>Chi vuoi UCCIDERE?</p>
-  <div *ngFor="let item of arrayProva">
-    <input type="radio" name="personaggio" #{item}>{{item}}<br>
+<!-- Guardia del corpo -->
+  <div *ngIf="ruoloUtente =='guardia del corpo' " class="form">
+    <p>Sei la Guardia del corpo</p>
+    <p>Chi vuoi PROTEGGERE?</p>
+    <div *ngFor="let item of personaggiVivi">
+      <input type="radio" name="personaggio" (click)="bersaglio==item.nome">{{item.nome}}
+    </div><br>
+    <button type="submit" (click)="usaPotere(ruoloUtente, bersaglio)">Invia voto</button>
   </div>
-  <button type="submit">Invia voto</button>
-</div>
+  <!-- risultato votazione notte -->
+  <div *ngIf="esitoNotte == true">
+    <div *ngIf="morto==''">
+      <p>Hai protetto {{bersaglio}}, il lupo voleva ucciderlo</p>
+    </div>
+    <div *ngIf="morto!=''">
+      <p>Hai protetto {{bersaglio}}, ma il lupo ha ucciso {{morto}}</p>
+    </div>
+  </div>
 
 
+<!-- Veggente -->
+  <div *ngIf="ruoloUtente =='veggente' " class="form">
+    <p>Sei il VEGGENTE</p>
+    <p>Chi vuoi INDAGARE?</p>
+    <div *ngFor="let item of personaggiVivi">
+      <input type="radio" name="personaggio" (click)="bersaglio==item.nome">{{item.nome}}
+    </div><br>
+    <button type="submit" (click)="usaPotere(ruoloUtente, bersaglio)">Invia voto</button>
+  </div>
+  <!-- risultato votazione notte -->
+  <div *ngIf="esitoNotte == true">
+    <div *ngIf="morto!=''">
+      <p>Durante la notte è stato ucciso {{morto}}</p>
+      <div *ngIf="bersaglio==indagato">
+        <p>{{bersaglio}} è il lupo</p>
+      </div>
+    </div>
+    <div *ngIf="morto==''">
+      <p>Durante la notte non è stato ucciso nessuno, la guardia del corpo è riuscita a proteggere il bersaglio del lupo</p>
+      <div *ngIf="bersaglio!=indagato">
+        <p>{{bersaglio}} non è il lupo</p>
+      </div>
+    </div>
+  </div>
 
 
 
 <!------------- se: Contadino / Indemoniato ------------>
-<div *ngIf="ruoloUtente =='Contadino' ">
-      <!-- delay tempo x far passare la notte...  -->
-</div>
+  <div *ngIf="ruoloUtente =='contadino' " class="form">
+    <p>Sta avvenendo la votazione, tieni ancora gli occhi chiusi...</p>
+    <!-- se morto qualcuno -> dico che è stato ucciso il morto -->
+    <p *ngIf="morto!=''">E' stato ucciso {{morto}}</p>
+    <!-- se morto nessuno -> dico che non è morto nessun xke la guardia del corpo è riuscita a proteggere il bersaglio del lupo -->
+    <p *ngIf="morto==''">Non è stato ucciso nessuno, la guardia del corpo è riuscita a proteggere il bersaglio del lupo</p>
+  </div>
 
-<div *ngIf="ruoloUtente =='Indemoniato' ">
-      <!-- delay tempo x far passare la notte...  -->
+  <div *ngIf="ruoloUtente =='indemoniato' " class="form">
+    <p>Sta avvenendo la votazione, tieni ancora gli occhi chiusi...</p>
+    <!-- se morto qualcuno -> dico che è stato ucciso il morto -->
+    <p *ngIf="morto!=''">E' stato ucciso {{morto}}</p>
+    
+    <!-- se morto nessuno -> dico che non è morto nessun xke la guardia del corpo è riuscita a proteggere il bersaglio del lupo -->
+    <p *ngIf="morto==''">Non è stato ucciso nessuno, la guardia del corpo è riuscita a proteggere il bersaglio del lupo</p>
+  </div>
 
 </div>

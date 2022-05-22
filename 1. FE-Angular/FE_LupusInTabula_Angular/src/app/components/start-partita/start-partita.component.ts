@@ -10,6 +10,7 @@ import { PartitaService } from 'src/app/services/partita.service';
   styleUrls: ['./start-partita.component.scss']
 })
 export class StartPartitaComponent implements OnInit {
+  router: any;
 
 
   constructor(
@@ -20,8 +21,12 @@ export class StartPartitaComponent implements OnInit {
   }
 
 
-  startPartita(nomeUtente: String) : Observable<StartPartita> {
-    return this.partita.startPartita(nomeUtente)
+  startPartita(nomeUtente: string) {
+    return this.partita.startPartita(nomeUtente).subscribe( response => {
+      this.partita.ruoloUtente = response.ruolo
+      this.partita.personaggiVivi = response.personaggi
+      this.router.navigateByUrl('notte');
+    })
   }
 
 }

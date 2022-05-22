@@ -1,13 +1,13 @@
 
 export interface StartPartita {
-  ruolo?: String,
+  ruolo: string,
   personaggi?: Personaggio[]
 }
 
 
 export interface Personaggio {
-  nome: String,
-  ruolo: String,
+  nome: string,
+  ruolo: string,
   isAlive: boolean
 }
 

@@ -1,0 +1,22 @@
+
+  .backgroundImg{
+    background-image: url("./lupus_giorno.jpg");
+    background-size: cover;
+    height: 710px;
+    margin-left: 70px;
+    margin-right: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+
+  .form {
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+    background-color: white;
+    padding: 40px;
+    width: 300px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }

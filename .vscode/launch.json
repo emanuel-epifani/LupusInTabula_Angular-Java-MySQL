@@ -1,0 +1,23 @@
+{
+  // Usare IntelliSense per informazioni sui possibili attributi.
+  // Al passaggio del mouse vengono visualizzate le descrizioni degli attributi esistenti.
+  // Per altre informazioni, visitare: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    
+    {
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "request": "attach",
+      "type": "chrome",
+      "webRoot": "${workspaceFolder}"
+    },
+    
+    {
+      "type": "pwa-chrome",
+      "request": "launch",
+      "name": "Open notte.component.html",
+      "file": "c:\\Users\\epi94\\Desktop\\ENGIM\\lupusInTabula_Angular-Java-MySQL\\1. FE-Angular\\FE_LupusInTabula_Angular\\src\\app\\components\\notte\\notte.component.html"
+    }
+  ]
+}
