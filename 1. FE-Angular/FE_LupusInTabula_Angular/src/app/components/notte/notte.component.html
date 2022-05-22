@@ -1,14 +1,42 @@
-<p>notte works!</p>
 
-
-<!------------- se: Guardia del corpo/ Lupo / Veggente ------------->
+<!------------- se: Lupo / Guardia del corpo / Veggente ------------->
 <div *ngIf="ruoloUtente =='lupo' ">
   <p>Sei il LUPO</p>
   <p>Chi vuoi UCCIDERE?</p>
-  <div *ngFor="let item of personaggiVivi">
-    <input type="radio" name="" id="">{item}<br>
+  <div *ngFor="let item of arrayProva">
+    <input type="radio" name="personaggio" #{item}>{{item}}<br>
   </div>
-
+  <button type="submit" (click)="usaPotere(ruoloUtente,ruoloUtente)">Invia voto</button>
 </div>
 
+<div *ngIf="ruoloUtente =='lupo' ">
+  <p>Sei il LUPO</p>
+  <p>Chi vuoi UCCIDERE?</p>
+  <div *ngFor="let item of arrayProva">
+    <input type="radio" name="personaggio" #{item}>{{item}}<br>
+  </div>
+  <button type="submit">Invia voto</button>
+</div>
+
+<div *ngIf="ruoloUtente =='lupo' ">
+  <p>Sei il LUPO</p>
+  <p>Chi vuoi UCCIDERE?</p>
+  <div *ngFor="let item of arrayProva">
+    <input type="radio" name="personaggio" #{item}>{{item}}<br>
+  </div>
+  <button type="submit">Invia voto</button>
+</div>
+
+
+
+
+
 <!------------- se: Contadino / Indemoniato ------------>
+<div *ngIf="ruoloUtente =='Contadino' ">
+      <!-- delay tempo x far passare la notte...  -->
+</div>
+
+<div *ngIf="ruoloUtente =='Indemoniato' ">
+      <!-- delay tempo x far passare la notte...  -->
+
+</div>

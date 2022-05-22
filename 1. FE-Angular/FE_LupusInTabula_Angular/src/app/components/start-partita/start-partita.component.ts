@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StartPartita } from 'src/app/models/models';
+import { Personaggio, StartPartita } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
 
 
@@ -10,6 +10,7 @@ import { PartitaService } from 'src/app/services/partita.service';
   styleUrls: ['./start-partita.component.scss']
 })
 export class StartPartitaComponent implements OnInit {
+
 
   constructor(
     private partita : PartitaService

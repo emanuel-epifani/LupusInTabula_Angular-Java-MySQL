@@ -10,7 +10,8 @@ import { EsitoNotte, Personaggio, StartPartita } from '../models/models';
 export class PartitaService {
   partitaFinita = false
   ruoloUtente = ""
-  personaggiVivi: Personaggio[] = []
+  personaggiVivi: Personaggio[] = [] //array di oggetti
+  nomiPersonaggiVivi: String[] = [] //array di nomi
 
   constructor(
     private http: HttpClient
