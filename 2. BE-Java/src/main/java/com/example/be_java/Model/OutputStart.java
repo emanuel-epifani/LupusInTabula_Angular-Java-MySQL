@@ -10,4 +10,20 @@ public class OutputStart {
         this.ruolo = ruolo;
         this.arrayPersonaggi = arrayPersonaggi;
     }
+
+    public String getRuolo() {
+        return ruolo;
+    }
+
+    public void setRuolo(String ruolo) {
+        this.ruolo = ruolo;
+    }
+
+    public ArrayList<Personaggio> getArrayPersonaggi() {
+        return arrayPersonaggi;
+    }
+
+    public void setArrayPersonaggi(ArrayList<Personaggio> arrayPersonaggi) {
+        this.arrayPersonaggi = arrayPersonaggi;
+    }
 }

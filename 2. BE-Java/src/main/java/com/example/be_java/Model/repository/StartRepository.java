@@ -71,6 +71,7 @@ public class StartRepository {
         //assegno ad ogni personaggio creato (con costruttore vuoto), un nome dall'array mescolato e setto gli altri 2 parametri finora vuoti
         for (int i = 0; i < personaggi.size(); i++) {
             personaggi.get(i).setNome(nomiPersonaggi.get(i));
+            personaggi.get(i).setRuolo(personaggi.get(i).getClass().getSimpleName());
             personaggi.get(i).setAlive(true);
             personaggi.get(i).setProtected(false);
 
@@ -81,23 +82,26 @@ public class StartRepository {
         }
 
 
-        PreparedStatement pstmt =null;
+
         try {
 
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-           for (int i = 0; i < personaggi.size(); i++) {
-                String QUERY = "INSERT INTO personaggi ( nome, ruolo, isalive) VALUES (?,?,?)";
-                pstmt = conn.prepareStatement(QUERY);
+          for (int i = 0; i < personaggi.size(); i++) {
+                String QUERY = "INSERT INTO personaggi ( nome, ruolo, isalive) VALUES  (?,?,?)";
+               PreparedStatement pstmt = conn.prepareStatement(QUERY);
 
-                pstmt.setString(1, personaggi.get(0).getNome());//nome personaggio
-                pstmt.setString(2, personaggi.get(0).getClass().getSimpleName());//ruolo personaggio
-                pstmt.setBoolean(3, true);//isAlive
+              System.out.println(personaggi.get(i).getClass().getSimpleName());
 
-                pstmt.executeUpdate(QUERY);
+                 pstmt.setString(1, personaggi.get(i).getNome());//nome personaggio
+               pstmt.setString(2, personaggi.get(i).getRuolo());//ruolo personaggio
+                pstmt.setBoolean(3, true);//isAlive */
 
-            }
-            pstmt.close(); //chiudo lo statement
+                pstmt.executeUpdate();
+
+               pstmt.close(); //chiudo lo statement
+
+          }
             conn.close(); //chiudo la connessione
         } catch (SQLException e) {
 
