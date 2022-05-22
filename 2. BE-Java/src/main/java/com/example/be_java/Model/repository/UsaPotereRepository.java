@@ -17,7 +17,7 @@ public class UsaPotereRepository {
 
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            String QUERY = "Select * from personaggi where isAlive==true ";
+            String QUERY = "Select * from personaggi where isAlive = 1 ";
             PreparedStatement pstmt = conn.prepareStatement(QUERY);
 
             ResultSet rs =pstmt.executeQuery(QUERY);
@@ -48,7 +48,7 @@ public class UsaPotereRepository {
     public static EsitoNotte usapotere( String ruolo, String nome){
 
         //richiamo il metodo personaggi per poter integrare il metodo di usapotere che avevamo scritto in debug2
-        ArrayList<Personaggio> personaggi=  getPersonaggiVivi();
+        ArrayList<Personaggio> personaggi=  UsaPotereRepository.getPersonaggiVivi();
         //creo una variabile da utilizzare nel caso del veggente
 
         //istanzio l'oggetto esitoNotte vuoto (contenente morto="" e indagato="", per restituirlo a fine metodo una volta riempito
@@ -100,6 +100,7 @@ public class UsaPotereRepository {
         }
 
         String morto="";
+
         for (int i = 0; i < personaggi.size() ; i++) {
             if(personaggi.get(i).isAlive()==false){
                 morto= personaggi.get(i).getNome();
@@ -110,20 +111,23 @@ public class UsaPotereRepository {
         if(!morto.equalsIgnoreCase("")) {
             try {
                 Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                PreparedStatement pstmt = null;
+
                 for (int i = 0; i < personaggi.size(); i++) {
-                    String QUERY = "UPDATE personaggi isAlive=false where nome==? ";
-                    pstmt = conn.prepareStatement(QUERY);
-                    pstmt.setString(1, morto);//nome personaggio
+                    String QUERY = "UPDATE personaggi SET isAlive=? where nome=? ";
+                    PreparedStatement pstmt = conn.prepareStatement(QUERY);
+                    pstmt.setBoolean(1,false);
+                    pstmt.setString(2, morto);//nome personaggio
 
                     pstmt.executeUpdate();
+                    pstmt.close(); //chiudo lo statement
+
                 }
-                pstmt.close(); //chiudo lo statement
                 conn.close(); //chiudo la connessione
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+    esitoNotte.setMorto(morto);
 
 
         //l'indagato servirà al FE  (se l'utente è il veggnete) per ricordarsi chi votare/non votare al GIORNO successivo

@@ -86,12 +86,18 @@ public class StartRepository {
         try {
 
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            String clearQuery="TRUNCATE TABLE personaggi;";
+            PreparedStatement clearPstm=conn.prepareStatement(clearQuery);
+            clearPstm.execute();
+            clearPstm.close();
 
           for (int i = 0; i < personaggi.size(); i++) {
+              //svuota la tabella precedentemente riempita per iniziare nuova partita
+
+
                 String QUERY = "INSERT INTO personaggi ( nome, ruolo, isalive) VALUES  (?,?,?)";
                PreparedStatement pstmt = conn.prepareStatement(QUERY);
 
-              System.out.println(personaggi.get(i).getClass().getSimpleName());
 
                  pstmt.setString(1, personaggi.get(i).getNome());//nome personaggio
                pstmt.setString(2, personaggi.get(i).getRuolo());//ruolo personaggio

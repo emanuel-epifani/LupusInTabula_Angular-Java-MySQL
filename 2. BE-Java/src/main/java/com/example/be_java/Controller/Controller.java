@@ -44,7 +44,7 @@ public class Controller {
     }
 
     @PostMapping("/vota")
-    public String vota(@RequestParam(value = "bersagio") String bersagio) {
+    public String vota(@RequestParam(value = "bersaglio") String bersagio) {
         //ho solo spostato tutto il metodo in startRepository nel model per maggore chiarezza
         return VotaRepository.vota(bersagio);
     }

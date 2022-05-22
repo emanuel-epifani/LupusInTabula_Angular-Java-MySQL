@@ -46,15 +46,17 @@ public class VotaRepository {
         if(!piuvotato.equalsIgnoreCase("")) {
             try {
                 Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                PreparedStatement pstmt = null;
+
                 for (int i = 0; i < personaggi.size(); i++) {
-                    String QUERY = "UPDATE personaggi isAlive=false where nome==? ";
-                    pstmt = conn.prepareStatement(QUERY);
-                    pstmt.setString(1, piuvotato);//nome personaggio
+                    String QUERY = "UPDATE personaggi SET isAlive=? where nome=? ";
+                    PreparedStatement   pstmt = conn.prepareStatement(QUERY);
+                    pstmt.setBoolean(1,false);
+                    pstmt.setString(2, piuvotato);//nome personaggio
 
                     pstmt.executeUpdate();
+                    pstmt.close(); //chiudo lo statement
+
                 }
-                pstmt.close(); //chiudo lo statement
                 conn.close(); //chiudo la connessione
             } catch (SQLException e) {
                 e.printStackTrace();
