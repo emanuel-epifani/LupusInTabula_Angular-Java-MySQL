@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Personaggio, StartPartita } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
 
 

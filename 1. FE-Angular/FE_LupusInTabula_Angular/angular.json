@@ -26,6 +26,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -47,7 +48,7 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
-                }
+                } 
               ],
               "fileReplacements": [
                 {
@@ -83,7 +84,8 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "FE_LupusInTabula_Angular:build"
+            "browserTarget": "FE_LupusInTabula_Angular:build",
+            "proxyConfig": "src/proxy.conf.json"
           }
         },
         "test": {
