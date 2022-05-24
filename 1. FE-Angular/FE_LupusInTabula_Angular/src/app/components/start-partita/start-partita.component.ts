@@ -9,6 +9,7 @@ import { PartitaService } from 'src/app/services/partita.service';
 })
 export class StartPartitaComponent implements OnInit {
   router: any;
+  
 
 
   constructor(

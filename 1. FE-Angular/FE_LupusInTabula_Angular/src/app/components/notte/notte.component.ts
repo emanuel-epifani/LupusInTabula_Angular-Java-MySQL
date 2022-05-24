@@ -60,7 +60,11 @@ router: any;
 
   //..se sono un contadino/indemoniato -> faccio votare random e invio al "Giorno"
   eseguiNotte() {
-    this.partita.eseguiNotte().pipe(delay(3000)).subscribe( response => {
+    this.partita.eseguiNotte().subscribe( response => {
+      //mostro il div con l'esito della notte
+      this.esitoNotte = true 
+      //delay x dar tempo far leggere esito votazione note
+      delay(4000)
       this.router.navigateByUrl('giorno');
     })
   }
