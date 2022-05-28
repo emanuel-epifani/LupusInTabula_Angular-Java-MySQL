@@ -8,16 +8,14 @@ import com.example.be_java.Model.repository.EseguiNotteRepository;
 import com.example.be_java.Model.repository.StartRepository;
 import com.example.be_java.Model.repository.UsaPotereRepository;
 import com.example.be_java.Model.repository.VotaRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @RestController
 public class Controller {
 
+    @CrossOrigin(origins = "https//:localhost:4200")
     @PostMapping("/StartPartita")
     public OutputStart startPost(@RequestParam(value = "nome") String nometizio) {
         //ho solo spostato tutto il metodo in startRepository nel model per maggore chiarezza
