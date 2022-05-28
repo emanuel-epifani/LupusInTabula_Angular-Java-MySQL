@@ -32,9 +32,7 @@ export class StartPartitaComponent implements OnInit {
       console.log("RUOLO utente= "+this.partita.ruoloUtente)
       console.log(this.partita.personaggiVivi)
 
-      //this.router.navigateByUrl('notte');
-      //window.location.replace('notte')
-      //this.router!.navigateByUrl('giorno')
+
     })
   }
 

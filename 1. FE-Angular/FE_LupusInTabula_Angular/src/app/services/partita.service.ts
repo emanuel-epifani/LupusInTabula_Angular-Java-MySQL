@@ -10,7 +10,7 @@ import { EsitoNotte, Personaggio, StartPartita } from '../models/models';
 
 export class PartitaService {
   partitaFinita = false
-  ruoloUtente = ''
+  ruoloUtente?: string
   nomeUtente?: string
   personaggiVivi?: Personaggio[] //array di oggetti (TIPO di personaggio)
   

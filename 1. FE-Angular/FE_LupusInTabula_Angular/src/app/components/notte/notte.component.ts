@@ -29,6 +29,8 @@ router: AppRoutingModule | null | undefined;
   ) { }
 
   ngOnInit(): void {
+    console.log("NOME utente =" + this.partita.nomeUtente)
+    console.log("RUOLO utente= "+this.partita.ruoloUtente)
     //check se partita finita
     if(this.partita.partitaFinita == true){
       //this.router!.navigateByUrl('endPartita');
@@ -41,12 +43,12 @@ router: AppRoutingModule | null | undefined;
     this.bersaglio =''
 
     setTimeout(() => {
-    //..se sono un contadino/indemoniato -> faccio votare random e invio al "Giorno"
-     if(this.partita.ruoloUtente == ("Contadino"||"Indemoniato") ){
+     //..se sono un contadino/indemoniato -> faccio votare random e invio al "Giorno"
+     if(this.partita.ruoloUtente == "Contadino" || this.partita.ruoloUtente =="Indemoniato" ){
       this.eseguiNotte()
     }
     console.log("ruolo utente ", this.partita.ruoloUtente);
-    }, 500);
+    }, 4000);
 
 
     
@@ -60,11 +62,8 @@ router: AppRoutingModule | null | undefined;
       //mostro il div con l'esito della notte
       this.esitoNotte = true 
       //delay x dar tempo far leggere esito votazione note
-      delay(4000)
       console.log("sono nella rx dell'usaPotere")
       window.location.replace('http://localhost:4200/giorno')
-      //this.router.navigateByUrl('giorno')
-      //this.router.navigateByUrl('giorno')
     })
   }
 
@@ -72,8 +71,6 @@ router: AppRoutingModule | null | undefined;
   eseguiNotte() {
     this.partita.eseguiNotte().subscribe( response => {
       console.log("sono nella rx dell'esegui notte")
-      //mostro il div con l'esito della notte
-      this.esitoNotte = true 
       //delay x dar tempo far leggere esito votazione note      
       setTimeout(() => {
         //this.router.navigateByUrl('giorno');

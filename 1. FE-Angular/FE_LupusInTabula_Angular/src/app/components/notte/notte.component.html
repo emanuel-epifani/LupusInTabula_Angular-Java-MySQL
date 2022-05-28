@@ -11,7 +11,7 @@
     <button type="submit" (click)="usaPotere(this.partita.ruoloUtente, bersaglio)">Invia voto</button>
   </div>
   <!-- risultato votazione notte -->
-  <div *ngIf="esitoNotte == true">
+  <div *ngIf="esitoNotte == true"  class="form">
     <div *ngIf="morto!=''">
       <p>Sei riuscito ad uccidere {{morto}}</p>
     </div>
@@ -31,7 +31,7 @@
     <button type="submit" (click)="usaPotere(this.partita.ruoloUtente, bersaglio)">Invia voto</button>
   </div>
   <!-- risultato votazione notte -->
-  <div *ngIf="esitoNotte == true">
+  <div *ngIf="esitoNotte == true"  class="form">
     <div *ngIf="morto==''">
       <p>Hai protetto {{bersaglio}}, il lupo voleva ucciderlo</p>
     </div>
@@ -51,7 +51,7 @@
     <button type="submit" (click)="usaPotere(this.partita.ruoloUtente, bersaglio)">Invia voto</button>
   </div>
   <!-- risultato votazione notte -->
-  <div *ngIf="esitoNotte == true">
+  <div *ngIf="esitoNotte == true"  class="form">
     <div *ngIf="morto!=''">
       <p>Durante la notte è stato ucciso {{morto}}</p>
       <div *ngIf="bersaglio==indagato">

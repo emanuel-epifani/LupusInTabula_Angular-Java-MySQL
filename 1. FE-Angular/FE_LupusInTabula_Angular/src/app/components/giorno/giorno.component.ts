@@ -9,7 +9,8 @@ import { PartitaService } from 'src/app/services/partita.service';
   styleUrls: ['./giorno.component.scss']
 })
 export class GiornoComponent implements OnInit {
-  nomeUtente?: string = this.partita.nomeUtente
+  nomeUtente?: String = this.partita.nomeUtente
+  ruoloUtente?: String = this.partita.ruoloUtente
   personaggiVivi?: Personaggio[] = this.partita.personaggiVivi
   //voto utente
   bersaglio =""
@@ -18,13 +19,28 @@ export class GiornoComponent implements OnInit {
 
   constructor(
     public partita : PartitaService
-  ) { }
+  ) { 
+    //this.nomeUtente = this.partita.ruoloUtente?.subscribe()
+
+  }
 
   ngOnInit(): void {
-        //check se partita finita
-        if(this.partita.partitaFinita == true){
-          this.router.navigateByUrl('endPartita');
-        }
+    console.log("PRIMA,nell'oninit");
+    console.log("NOME utente =" + this.nomeUtente)
+    console.log("RUOLO utente= "+this.partita.ruoloUtente)
+    console.log("PARTITA FINITA =" + this.partita.partitaFinita)
+
+    setTimeout(() => {
+      console.log("DOPO,nel settimeout");
+      console.log("NOME utente =" + this.nomeUtente)
+      console.log("RUOLO utente= "+this.partita.ruoloUtente)
+      console.log("PARTITA FINITA =" + this.partita.partitaFinita)
+      //check se partita finita
+      if(this.partita.partitaFinita == true){
+        window.location.replace('http://localhost:4200/endPartita')
+      }
+    }, 200);
+
   }
 
   vota(personaVotata  : string){

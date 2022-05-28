@@ -25,6 +25,7 @@ public class Controller {
     }
 
     //NOTTE - fa usare i poteri alle persone
+    @CrossOrigin(origins = "https//:localhost:4200")
     @PostMapping("/usaPotere")
     public EsitoNotte usaPotere(
             @RequestParam (value = "ruolo") String  ruoloUtente,
@@ -33,16 +34,19 @@ public class Controller {
         return UsaPotereRepository.usapotere( ruoloUtente, bersagioPotere);
     }
 
+    @CrossOrigin(origins = "https//:localhost:4200")
     @GetMapping ("/getVivi")
     public ArrayList<Personaggio> getVivi(){
         return UsaPotereRepository.getPersonaggiVivi();
     }
 
+    @CrossOrigin(origins = "https//:localhost:4200")
     @GetMapping ("/eseguiNotte")
     public EsitoNotte eseguiNotte(){
         return EseguiNotteRepository.esegui();
     }
 
+    @CrossOrigin(origins = "https//:localhost:4200")
     @PostMapping("/vota")
     public String vota(@RequestParam(value = "bersaglio") String bersagio) {
         //ho solo spostato tutto il metodo in startRepository nel model per maggore chiarezza
