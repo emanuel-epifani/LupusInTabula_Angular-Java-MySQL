@@ -17,6 +17,7 @@ import java.util.ArrayList;
 @RestController
 public class Controller {
 
+    @CrossOrigin(origins = "https//:localhost:4200")
     @PostMapping("/StartPartita")
     public OutputStart startPost(@RequestParam(value = "nome") String nometizio) {
         //ho solo spostato tutto il metodo in startRepository nel model per maggore chiarezza

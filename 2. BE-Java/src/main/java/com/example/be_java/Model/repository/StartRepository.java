@@ -85,8 +85,23 @@ public class StartRepository {
                 personaggioUtente = personaggi.get(i).getClass().getSimpleName();
             }
         }
+        if(personaggioUtente.equalsIgnoreCase("Giudice")){
+            for (int i = 0; i < personaggi.size(); i++) {
+               if( personaggi.get(i).getNome().equalsIgnoreCase( nometizio)){
+                   if(i == personaggi.size()-1){
+                       personaggi.get(i).setRuolo(personaggi.get(0).getRuolo());
+                       personaggioUtente =personaggi.get(0).getRuolo();
+                       personaggi.get(0).setRuolo("Giudice");
 
-
+                   }
+                   if(i <personaggi.size()-1){
+                       personaggi.get(i).setRuolo(personaggi.get(i+1).getRuolo());
+                       personaggioUtente =personaggi.get(i+1).getRuolo();
+                       personaggi.get(i+1).setRuolo("Giudice");
+                   }
+               }
+            }
+        }
 
         try {
 
