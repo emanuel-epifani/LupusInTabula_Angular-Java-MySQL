@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { EsitoNotte, Personaggio, StartPartita } from '../models/models';
 
 @Injectable({
@@ -9,11 +10,12 @@ import { EsitoNotte, Personaggio, StartPartita } from '../models/models';
 
 export class PartitaService {
   partitaFinita = false
-  ruoloUtente = "Lupo"
+  ruoloUtente = ''
   nomeUtente?: string
-  personaggiVivi?: Personaggio[] = [] //array di oggetti (TIPO di personaggio)
+  personaggiVivi?: Personaggio[] //array di oggetti (TIPO di personaggio)
+  
   morto = ''
-  indagato = ""
+  indagato = ''
   
   constructor(
     private http: HttpClient
@@ -21,28 +23,28 @@ export class PartitaService {
 
   /** - invio il NOME dell'utente
    * - return RUOLO che gli è capitato e ARRAY di PERSONAGGI*/
-  startPartita(nomeUtente: string): Observable<StartPartita> {
-    return this.http.post<StartPartita>('http://localhost:8090/api/StartPartita', nomeUtente);
-  }
+  startPartita(nomeUtente: string): Observable<any> {
+    return this.http.post<any>(`http://localhost:8090/StartPartita?nome=${nomeUtente}`, nomeUtente);  
+}
 
   /** Notte: se sono: Lupo / Guardia del corpo / Veggente:
    * - passo il mio RUOLO e il GIOCATORE INDICATO
    * - return (eventuale) MORTO ed (eventuale) INDAGATO*/
-  usaPotere(mioRuolo: string, giocatoreIndicato: string) : Observable<EsitoNotte> {
-    return this.http.get<EsitoNotte>('http://localhost:8090/api/usaPotere');
+  usaPotere(mioRuolo: string, giocatoreIndicato: string) : Observable<any> {
+    return this.http.get<any>(`http://localhost:8090/usaPotere?ruolo=${mioRuolo}&nome=${giocatoreIndicato}`);
   }
 
   /** Notte: se sono: Contadino / Indemoniato:
    * - non passo niente, ma faccio eseguire la notte
    * - return */
-  eseguiNotte() : Observable<EsitoNotte> {
-    return this.http.get<EsitoNotte>('http://localhost:8090/api/eseguiNotte');
+  eseguiNotte() : Observable<any> {
+    return this.http.get<any>('http://localhost:8090/eseguiNotte');
   }
 
   /** Giorno:
    * - return: MORTO */
-  vota(personaVotata : string) :Observable<string> {
-    return this.http.post<string>('http://localhost:8090/api/vota',personaVotata);
+  vota(personaVotata : string) :Observable<any> {
+    return this.http.post<any>(`http://localhost:8090/vota?bersaglio=${personaVotata}`,personaVotata);
   }
 
 

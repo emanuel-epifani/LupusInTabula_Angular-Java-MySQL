@@ -9,7 +9,6 @@ import { PartitaService } from 'src/app/services/partita.service';
   styleUrls: ['./giorno.component.scss']
 })
 export class GiornoComponent implements OnInit {
-  ruoloUtente = this.partita.ruoloUtente
   nomeUtente?: string = this.partita.nomeUtente
   personaggiVivi?: Personaggio[] = this.partita.personaggiVivi
   //voto utente
@@ -18,7 +17,7 @@ export class GiornoComponent implements OnInit {
   router: any;
 
   constructor(
-    private partita : PartitaService
+    public partita : PartitaService
   ) { }
 
   ngOnInit(): void {

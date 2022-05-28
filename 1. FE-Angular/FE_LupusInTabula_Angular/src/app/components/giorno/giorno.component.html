@@ -1,26 +1,21 @@
 <div class="backgroundImg">
 
   <!-- se sono Contadino/Veggente/Guardia del corpo -->
-  <div *ngIf="ruoloUtente=='Contadino'||'Veggente'||'Guardia_del_corpo'" class="form">
+  <div *ngIf="(this.partita.ruoloUtente==('Contadino'||'Veggente'||'Guardia_del_corpo'))" class="form">
     <p>Chi secondo te è il LUPO?</p>
-    <div *ngFor="let item of personaggiVivi" ngIf="item.isAlive = true">
-      <div *ngIf="item.nome!=nomeUtente">
-      <input type="radio" name="personaggio" (click)="bersaglio==item.nome" >{{item.nome}}
-      </div>
+    <div *ngFor="let item of this.partita.personaggiVivi" ngIf="item.isAlive = true" >
+      <input type="radio" name="personaggio" value="{{item.nome}}" (click)="bersaglio=item.nome" name="bersaglio" *ngIf="item.nome!= this.partita.nomeUtente"><span *ngIf="item.nome!= this.partita.nomeUtente">{{item.nome}}</span>
     </div><br>
     <button type="submit" (click)="vota(bersaglio)">Invia voto</button>
   </div>
 
   <!-- se sono Indemoniato/Lupo  -->
-  <div *ngIf="ruoloUtente=='Indemoniato'||'Lupo'" class="form">
+  <div *ngIf="(this.partita.ruoloUtente==('Lupo'||'Indemoniato'))" class="form">
     <p>Chi secondo te è il CONTADINO?</p>
-    <div *ngFor="let item of personaggiVivi" ngIf="item.isAlive = true">
-      <div *ngIf="item.nome!=nomeUtente">
-      <input type="radio" name="personaggio" (click)="bersaglio==item.nome" >{{item.nome}}
-      </div>
+    <div *ngFor="let item of this.partita.personaggiVivi" ngIf="item.isAlive = true" >
+      <input type="radio" name="personaggio" value="{{item.nome}}" (click)="bersaglio=item.nome" name="bersaglio" *ngIf="item.nome!= this.partita.nomeUtente"><span *ngIf="item.nome!= this.partita.nomeUtente">{{item.nome}}</span>
     </div><br>
     <button type="submit" (click)="vota(bersaglio)">Invia voto</button>
   </div>
-
 
 </div>

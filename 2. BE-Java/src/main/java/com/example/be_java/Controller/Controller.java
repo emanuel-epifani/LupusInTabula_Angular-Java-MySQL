@@ -8,13 +8,12 @@ import com.example.be_java.Model.repository.EseguiNotteRepository;
 import com.example.be_java.Model.repository.StartRepository;
 import com.example.be_java.Model.repository.UsaPotereRepository;
 import com.example.be_java.Model.repository.VotaRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 public class Controller {
 
@@ -48,8 +47,5 @@ public class Controller {
         //ho solo spostato tutto il metodo in startRepository nel model per maggore chiarezza
         return VotaRepository.vota(bersagio);
     }
-
-
-
 
 }

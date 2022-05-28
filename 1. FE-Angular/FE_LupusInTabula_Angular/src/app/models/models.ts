@@ -1,7 +1,7 @@
 
 export interface StartPartita {
   ruolo: string,
-  personaggi?: Personaggio[]
+  arrayPersonaggi?: Personaggio[]
 }
 
 
@@ -15,4 +15,5 @@ export interface EsitoNotte {
   morto?: string,
   indagato?: string
 }
+
 

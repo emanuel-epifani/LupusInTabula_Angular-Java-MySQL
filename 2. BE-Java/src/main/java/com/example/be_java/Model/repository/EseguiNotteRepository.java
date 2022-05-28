@@ -5,6 +5,7 @@ import com.example.be_java.Model.Personaggio;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+//import com.mysql.cj.jdbc.Driver;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { delay } from 'rxjs';
+import { Location } from '@angular/common';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 import { EsitoNotte, Personaggio } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
 
@@ -9,9 +12,6 @@ import { PartitaService } from 'src/app/services/partita.service';
   styleUrls: ['./notte.component.scss']
 })
 export class NotteComponent implements OnInit {
-ruoloUtente = this.partita.ruoloUtente
-nomeUtente?: string = this.partita.nomeUtente
-personaggiVivi?: Personaggio[] = this.partita.personaggiVivi
 //voto utente
 bersaglio =""
 // x esitoNotte
@@ -20,29 +20,36 @@ indagato?: string = ""
 //x mostrare o meno la view con il risultato della votazione post "click"
 esitoNotte?: boolean
 //rotte
-router: any;
+router: AppRoutingModule | null | undefined;
   
 
   constructor(
-    private partita : PartitaService
+    public partita : PartitaService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
     //check se partita finita
     if(this.partita.partitaFinita == true){
-      this.router.navigateByUrl('endPartita');
+      //this.router!.navigateByUrl('endPartita');
     }
 
     //nasconodo il div con scritto l'esito della notte
     this.esitoNotte = false 
-    this.morto = ""
-    this.indagato =""
-    this.bersaglio =""
+    this.morto = ''
+    this.indagato =''
+    this.bersaglio =''
 
+    setTimeout(() => {
     //..se sono un contadino/indemoniato -> faccio votare random e invio al "Giorno"
-    if(this.partita.ruoloUtente == "contadino"|| "indemoniato"){
+     if(this.partita.ruoloUtente == ("Contadino"||"Indemoniato") ){
       this.eseguiNotte()
     }
+    console.log("ruolo utente ", this.partita.ruoloUtente);
+    }, 500);
+
+
+    
   }
 
   // se sono.. Lupo / Veggente / Guardia del corpo
@@ -53,19 +60,25 @@ router: any;
       //mostro il div con l'esito della notte
       this.esitoNotte = true 
       //delay x dar tempo far leggere esito votazione note
-       delay(4000)
-       this.router.navigateByUrl('giorno')
+      delay(4000)
+      console.log("sono nella rx dell'usaPotere")
+      window.location.replace('http://localhost:4200/giorno')
+      //this.router.navigateByUrl('giorno')
+      //this.router.navigateByUrl('giorno')
     })
   }
 
   //..se sono un contadino/indemoniato -> faccio votare random e invio al "Giorno"
   eseguiNotte() {
     this.partita.eseguiNotte().subscribe( response => {
+      console.log("sono nella rx dell'esegui notte")
       //mostro il div con l'esito della notte
       this.esitoNotte = true 
-      //delay x dar tempo far leggere esito votazione note
-      delay(4000)
-      this.router.navigateByUrl('giorno');
+      //delay x dar tempo far leggere esito votazione note      
+      setTimeout(() => {
+        //this.router.navigateByUrl('giorno');
+        window.location.replace('http://localhost:4200/giorno')
+      }, 5000);
     })
   }
 
