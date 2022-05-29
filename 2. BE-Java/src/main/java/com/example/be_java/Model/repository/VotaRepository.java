@@ -1,5 +1,6 @@
 package com.example.be_java.Model.repository;
 
+import com.example.be_java.Model.EsitoVoto;
 import com.example.be_java.Model.Personaggio;
 
 import java.sql.Connection;
@@ -13,8 +14,10 @@ import static com.example.be_java.Model.Constants.DBconnection.*;
 import static com.example.be_java.Model.repository.UsaPotereRepository.getPersonaggiVivi;
 
 public class VotaRepository {
-    public static String vota(String bersaglio){
-        String piuvotato="";
+    public static EsitoVoto vota(String bersaglio){
+
+        EsitoVoto esitoVoto = new EsitoVoto();
+        //String piuvotato="";
 
         ArrayList<Personaggio> personaggi=  getPersonaggiVivi();
 
@@ -39,11 +42,12 @@ public class VotaRepository {
         for (int i=0; i<personaggi.size();i++ ){
           if(personaggi.get(i).getVotiRicevuti()== max){
               personaggi.get(i).setAlive(false);
-             piuvotato= personaggi.get(i).getNome();
+              esitoVoto.setPiùvotato(personaggi.get(i).getNome());
+              //piuvotato = personaggi.get(i).getNome();
           };
 
         }
-        if(!piuvotato.equalsIgnoreCase("")) {
+        if(!esitoVoto.getPiùvotato().equalsIgnoreCase("")) {
             try {
                 Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
@@ -51,7 +55,7 @@ public class VotaRepository {
                     String QUERY = "UPDATE personaggi SET isAlive=? where nome=? ";
                     PreparedStatement   pstmt = conn.prepareStatement(QUERY);
                     pstmt.setBoolean(1,false);
-                    pstmt.setString(2, piuvotato);//nome personaggio
+                    pstmt.setString(2, esitoVoto.getPiùvotato());//nome personaggio
 
                     pstmt.executeUpdate();
                     pstmt.close(); //chiudo lo statement
@@ -64,7 +68,7 @@ public class VotaRepository {
         }
 
 
-    return piuvotato;
+    return esitoVoto;
     }
 
 

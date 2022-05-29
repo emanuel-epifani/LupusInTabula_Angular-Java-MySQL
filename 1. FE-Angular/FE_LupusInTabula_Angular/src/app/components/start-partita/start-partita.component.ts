@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { StartPartita } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
@@ -10,12 +11,12 @@ import { PartitaService } from 'src/app/services/partita.service';
   styleUrls: ['./start-partita.component.scss']
 })
 export class StartPartitaComponent implements OnInit {
-  router: AppRoutingModule | null | undefined;
   
 
 
   constructor(
-    private partita : PartitaService
+    private partita : PartitaService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -28,10 +29,12 @@ export class StartPartitaComponent implements OnInit {
       this.partita.ruoloUtente = response.ruolo
       this.partita.personaggiVivi = response.arrayPersonaggi
 
-      console.log("NOME utente =" + nomeUtente)
-      console.log("RUOLO utente= "+this.partita.ruoloUtente)
+      console.log("------------START PARTITA-----------");
+      console.log("SP--NOME utente =" + nomeUtente)
+      console.log("SP--RUOLO utente= "+this.partita.ruoloUtente)
+      console.log("SP--partita FINITA= " +this.partita.partitaFinita);
       console.log(this.partita.personaggiVivi)
-
+      this.router.navigateByUrl('/notte')
 
     })
   }

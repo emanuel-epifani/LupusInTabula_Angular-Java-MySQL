@@ -13,70 +13,87 @@ import { PartitaService } from 'src/app/services/partita.service';
 })
 export class NotteComponent implements OnInit {
 //voto utente
-bersaglio =""
+bersaglio?:string
 // x esitoNotte
-morto? : string= ""
-indagato?: string = ""
-//x mostrare o meno la view con il risultato della votazione post "click"
+morto?:string
+indagato? = this.partita.indagato
+//x mostrare la view con la votazione o con il risultato della votazione
+votazioneNotte?: boolean
 esitoNotte?: boolean
 //rotte
-router: AppRoutingModule | null | undefined;
   
 
   constructor(
     public partita : PartitaService,
-    private location: Location
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    console.log("NOME utente =" + this.partita.nomeUtente)
-    console.log("RUOLO utente= "+this.partita.ruoloUtente)
     //check se partita finita
-    if(this.partita.partitaFinita == true){
-      //this.router!.navigateByUrl('endPartita');
-    }
-
-    //nasconodo il div con scritto l'esito della notte
+    this.partita.checkIfEndPartita()
+    //mostro la votazione e nascondo l'esito
+    this.votazioneNotte = true 
     this.esitoNotte = false 
     this.morto = ''
     this.indagato =''
     this.bersaglio =''
 
-    setTimeout(() => {
-     //..se sono un contadino/indemoniato -> faccio votare random e invio al "Giorno"
-     if(this.partita.ruoloUtente == "Contadino" || this.partita.ruoloUtente =="Indemoniato" ){
+    console.log("--------------------- NOTTE -----------------------");
+    console.log("Notte--NOME utente =" + this.partita.nomeUtente)
+    console.log("Notte--RUOLO utente= "+this.partita.ruoloUtente)
+    console.log("Notte--partita FINITA= " +this.partita.partitaFinita);
+    console.log(this.partita.personaggiVivi)
+    
+    //..se sono un Contadino/Indemoniato -> faccio votare random e invio al "Giorno"
+    if(this.partita.ruoloUtente == "Contadino" || this.partita.ruoloUtente =="Indemoniato" ){
       this.eseguiNotte()
     }
-    console.log("ruolo utente ", this.partita.ruoloUtente);
-    }, 4000);
-
-
-    
   }
 
   // se sono.. Lupo / Veggente / Guardia del corpo
   usaPotere(mioRuolo: string, giocatoreIndicato: string) {
     return this.partita.usaPotere(mioRuolo, giocatoreIndicato).subscribe( response => {
       this.morto= response.morto
+      console.log("Durante la notte è stato ucciso "+this.morto);
+      //..tolgo il morto dall'array dei personaggi vivi
+      for (let i = 0; i < this.partita.personaggiVivi!.length; i++) {
+        if(this.partita.personaggiVivi![i].nome==this.morto){
+          this.partita.personaggiVivi![i].alive= false
+        }
+      }
       this.indagato = response.indagato
       //mostro il div con l'esito della notte
+      this.votazioneNotte= false
       this.esitoNotte = true 
       //delay x dar tempo far leggere esito votazione note
-      console.log("sono nella rx dell'usaPotere")
-      window.location.replace('http://localhost:4200/giorno')
+      setTimeout(() => {
+        //altrimenti continuo a giocare
+        this.router.navigateByUrl('/giorno')
+      }, 2800);
     })
   }
 
-  //..se sono un contadino/indemoniato -> faccio votare random e invio al "Giorno"
+  //se sono.. un Contadino/Indemoniato -> faccio votare random e invio al "Giorno"
   eseguiNotte() {
     this.partita.eseguiNotte().subscribe( response => {
-      console.log("sono nella rx dell'esegui notte")
+      this.morto= response.morto
+      console.log("Durante la notte è stato ucciso "+this.morto);
+      //..tolgo il morto dall'array dei personaggi vivi
+      for (let i = 0; i < this.partita.personaggiVivi!.length; i++) {
+        if(this.partita.personaggiVivi![i].nome==this.morto){
+          this.partita.personaggiVivi![i].alive= false
+        }
+      }
       //delay x dar tempo far leggere esito votazione note      
       setTimeout(() => {
-        //this.router.navigateByUrl('giorno');
-        window.location.replace('http://localhost:4200/giorno')
-      }, 5000);
+        //altrimenti continuo a giocare
+        this.router.navigateByUrl('/giorno')
+      }, 2800);
     })
   }
+
+
+
+
 
 }

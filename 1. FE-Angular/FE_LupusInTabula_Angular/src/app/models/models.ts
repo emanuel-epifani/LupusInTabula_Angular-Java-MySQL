@@ -8,12 +8,16 @@ export interface StartPartita {
 export interface Personaggio {
   nome: string,
   ruolo: string,
-  isAlive: boolean
+  alive: boolean
 }
 
 export interface EsitoNotte {
   morto?: string,
   indagato?: string
+}
+
+export interface EsitoVoto {
+  piùvotato?: string
 }
 
 
