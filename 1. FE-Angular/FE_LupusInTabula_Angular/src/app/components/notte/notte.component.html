@@ -19,6 +19,7 @@
   </div>
   <!-- risultato votazione notte -->
   <div *ngIf="esitoNotte == true && this.partita.ruoloUtente == 'Lupo' "  class="form">
+    <h4 style="text-align: center;"><u>Esito Notte</u></h4>
     <div *ngIf="morto!=''">
       <p>Sei riuscito ad uccidere {{morto}}</p>
     </div>
@@ -43,6 +44,7 @@
   </div>
   <!-- risultato votazione notte -->
   <div *ngIf="esitoNotte == true && this.partita.ruoloUtente == 'Guardia_del_corpo' "  class="form">
+    <h4 style="text-align: center;"><u>Esito Notte</u></h4>
     <div *ngIf="morto==''">
       <p>Hai protetto {{bersaglio}}, il lupo voleva ucciderlo</p>
     </div>
@@ -67,6 +69,7 @@
   </div>
   <!-- risultato votazione notte -->
   <div *ngIf="esitoNotte == true && this.partita.ruoloUtente == 'Veggente' "  class="form">
+    <h4 style="text-align: center;"><u>Esito Notte</u></h4>
     <div *ngIf="morto!=''">
       <p>Durante la notte è stato ucciso {{morto}}</p>
       <div *ngIf="bersaglio==indagato">
@@ -88,21 +91,43 @@
 
 <!------------- se: Contadino / Indemoniato ------------>
   <div *ngIf="this.partita.ruoloUtente =='Contadino' " class="form">
-    <div class="notte"><b><u> NOTTE</u></b></div>
+
+    <!-- Votazione notte ...stanno votando, aspeta l'esito -->
+    <div *ngIf="this.votazioneNottePassiva==true">
+      <h4 style="text-align: center;"><u>Esito Notte</u></h4>
+      <p>Sei il <u>Contadino</u></p>
+      <p>Sta avvenendo la votazione, aspetta l'esito..</p>
+    </div>
+    <!-- esito votazione notte -->
+    <div *ngIf="esitoNotte == true">
+    <h4 style="text-align: center;"><u>Esito Notte</u></h4>
     <p>Sei il <u>Contadino</u></p>
-    <!-- se morto qualcuno -> dico che è stato ucciso il morto -->
-    <p *ngIf="morto!=''">E' stato ucciso {{morto}}</p>
-    <!-- se morto nessuno -> dico che non è morto nessun xke la guardia del corpo è riuscita a proteggere il bersaglio del lupo -->
-    <p *ngIf="morto==''">Non è stato ucciso nessuno, la guardia del corpo è riuscita a proteggere il bersaglio del lupo</p>
+      <!-- se morto qualcuno -> dico che è stato ucciso il morto -->
+      <p *ngIf="morto!=''">E' stato ucciso {{morto}}</p>
+      <!-- se morto nessuno -> dico che non è morto nessun xke la guardia del corpo è riuscita a proteggere il bersaglio del lupo -->
+      <p *ngIf="morto==''">Non è stato ucciso nessuno, la guardia del corpo è riuscita a proteggere il bersaglio del lupo</p>
+    </div>
+
   </div>
 
   <div *ngIf="this.partita.ruoloUtente =='Indemoniato' " class="form">
-    <div class="notte"><b><u> NOTTE</u></b></div>
+
+    <!-- Votazione notte ...stanno votando, aspeta l'esito -->
+    <div *ngIf="this.votazioneNottePassiva==true">
+      <h4 style="text-align: center;"><u>Esito Notte</u></h4>
+      <p>Sei l' <u>Indemoniato</u></p>
+      <p>Sta avvenendo la votazione, aspetta l'esito..</p>
+    </div>
+    <!-- esito votazione notte -->
+    <div *ngIf="esitoNotte == true">
+    <h4 style="text-align: center;"><u>Esito Notte</u></h4>
     <p>Sei l' <u>Indemoniato</u></p>
-    <!-- se morto qualcuno -> dico che è stato ucciso il morto -->
-    <p *ngIf="morto!=''">E' stato ucciso {{morto}}</p>    
-    <!-- se morto nessuno -> dico che non è morto nessun xke la guardia del corpo è riuscita a proteggere il bersaglio del lupo -->
-    <p *ngIf="morto==''">Non è stato ucciso nessuno, la guardia del corpo è riuscita a proteggere il bersaglio del lupo</p>
+      <!-- se morto qualcuno -> dico che è stato ucciso il morto -->
+      <p *ngIf="morto!=''">E' stato ucciso {{morto}}</p>    
+      <!-- se morto nessuno -> dico che non è morto nessun xke la guardia del corpo è riuscita a proteggere il bersaglio del lupo -->
+      <p *ngIf="morto==''">Non è stato ucciso nessuno, la guardia del corpo è riuscita a proteggere il bersaglio del lupo</p>
+    </div>
+  
   </div>
 
 </div>

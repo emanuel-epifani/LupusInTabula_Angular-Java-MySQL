@@ -20,6 +20,7 @@ indagato? = this.partita.indagato
 //x mostrare la view con la votazione o con il risultato della votazione
 votazioneNotte?: boolean
 esitoNotte?: boolean
+votazioneNottePassiva?: boolean
 //rotte
   
 
@@ -30,9 +31,10 @@ esitoNotte?: boolean
 
   ngOnInit(): void {
     //check se partita finita
-    this.partita.checkIfEndPartita()
+    //this.partita.checkIfEndPartita()
     //mostro la votazione e nascondo l'esito
-    this.votazioneNotte = true 
+    this.votazioneNotte = true
+    this.votazioneNottePassiva = true
     this.esitoNotte = false 
     this.morto = ''
     this.indagato =''
@@ -67,9 +69,11 @@ esitoNotte?: boolean
       this.esitoNotte = true 
       //delay x dar tempo far leggere esito votazione note
       setTimeout(() => {
+        //check se partita finita
+        this.partita.checkIfEndPartita()
         //altrimenti continuo a giocare
         this.router.navigateByUrl('/giorno')
-      }, 2800);
+      }, 3500);
     })
   }
 
@@ -84,11 +88,18 @@ esitoNotte?: boolean
           this.partita.personaggiVivi![i].alive= false
         }
       }
-      //delay x dar tempo far leggere esito votazione note      
+      //delay x far leggere che si sta votando, di aspettare
       setTimeout(() => {
+        this.votazioneNottePassiva = false
+        this.esitoNotte = true 
+      }, 3000);
+      //delay x far leggere esito votazione notte      
+      setTimeout(() => {
+        //check se partita finita
+        this.partita.checkIfEndPartita()
         //altrimenti continuo a giocare
         this.router.navigateByUrl('/giorno')
-      }, 2800);
+      }, 6500);
     })
   }
 

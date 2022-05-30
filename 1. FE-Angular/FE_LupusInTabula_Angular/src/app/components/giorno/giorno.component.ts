@@ -27,7 +27,7 @@ export class GiornoComponent implements OnInit {
 
   ngOnInit(): void {
     //check se partita finita
-    this.partita.checkIfEndPartita()
+    //this.partita.checkIfEndPartita()
     //mostro la votazione e nascondo l'esito
     this.votazioneGiorno = true
     this.esitoGiorno = false
@@ -58,6 +58,8 @@ export class GiornoComponent implements OnInit {
       }
       
       setTimeout(() => {
+        //check se partita finita
+        this.partita.checkIfEndPartita()
         //altrimenti continuo a giocare
         this.router.navigateByUrl('/notte')
       }, 2800);

@@ -8,15 +8,18 @@ import { PartitaService } from 'src/app/services/partita.service';
   styleUrls: ['./end-partita.component.scss']
 })
 export class EndPartitaComponent implements OnInit {
-  ruoloUtente = this.partita.ruoloUtente
-  nomeUtente?: string = this.partita.nomeUtente
-  personaggiVivi?: Personaggio[] = this.partita.personaggiVivi
+
 
   constructor(
-    private partita : PartitaService
+    public partita : PartitaService
   ) { }
 
   ngOnInit(): void {
+    console.log("--------------------- GIORNO -----------------------");
+    console.log("Giorno--NOME utente = " + this.partita.nomeUtente)
+    console.log("Giorno--RUOLO utente = "+this.partita.ruoloUtente)
+    console.log("Giorno--partita FINITA= " +this.partita.partitaFinita);
+    console.log(this.partita.personaggiVivi)
   }
 
 }

@@ -14,7 +14,12 @@ export class PartitaService {
   ruoloUtente?: string
   nomeUtente?: string
   personaggiVivi?: Personaggio[] = [] //array di oggetti (TIPO di personaggio)
-  
+  //x check su if partita
+  ioMorto?: boolean //-> hai perso, sei stato ucciso
+  lupoMorto?: boolean
+  pochiBuoni?: boolean
+
+
   morto? :string
   indagato? :string 
 
@@ -58,6 +63,7 @@ export class PartitaService {
       if(this.personaggiVivi![i].nome == this.nomeUtente){
         if(this.personaggiVivi![i].alive == false){
           this.partitaFinita = true
+          this.ioMorto = true //->check sono morto io
           console.log("La partita è finita, sei morto te");
           console.log("E' morto "+this.personaggiVivi![i].nome);
           //delay x far leggere esito votazione
@@ -72,6 +78,7 @@ export class PartitaService {
       if(this.personaggiVivi![i].ruolo == "Lupo"){
         if(this.personaggiVivi![i].alive == false){
           this.partitaFinita = true
+          this.lupoMorto = true //-> check è morto il lupo
           console.log("La partita è finita, è morto il lupo");
           console.log("Il "+this.personaggiVivi![i].ruolo+" è' morto");
           //delay x far leggere esito votazione
@@ -83,7 +90,7 @@ export class PartitaService {
       
     }
     //3. sn rimasti solo 2 buoni in vita -> ..redirect EndPartita
-    let countBuoniVivi =0
+    let countBuoniVivi = 0
     //conto il totale di buoniVivi
     for (let i = 0; i < this.personaggiVivi!.length; i++) {
       if(this.personaggiVivi![i].ruolo == "Contadino" ||
@@ -96,6 +103,7 @@ export class PartitaService {
     }//se meno di 3 finita
     if(countBuoniVivi<3){
       this.partitaFinita = true
+      this.pochiBuoni = true
       console.log("La partita è finita, sono rimasti solo due buoni");
       //delay x far leggere esito votazione
       setTimeout(() => {

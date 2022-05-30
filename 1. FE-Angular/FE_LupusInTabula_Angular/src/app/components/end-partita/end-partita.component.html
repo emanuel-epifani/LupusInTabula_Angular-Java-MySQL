@@ -1,13 +1,26 @@
 <div class="backgroundImg">
 
   <div class="form">
-    <h1>PARTITA FINITA</h1>
-    <!-- hanno vinto i buoni -->
-    <p>Il lupo è stato ucciso, hanno vinto i buoni</p>
-    <!-- hanno vinto i cattivi -->
-    <p>Hanno vinto i cattivi</p>
-    <!-- hanno ucciso te -->
-    <p>Per te la partita è finita, sei stato ucciso</p>
+      <h1>PARTITA FINITA</h1>
+    <p *ngIf="this.partita.ioMorto">Hai perso, sei stato ucciso</p>
+
+    <div *ngIf="this.partita.lupoMorto">
+      <p *ngIf="this.partita.ruoloUtente=='Lupo'"> Hai perso, sei stato ucciso</p>
+      <p *ngIf="this.partita.ruoloUtente!='Lupo'">Hai vinto, il lupo è stato ucciso</p>
+    </div>
+
+    <div *ngIf="this.partita.pochiBuoni">
+      <p *ngIf="
+      this.partita.ruoloUtente=='Lupo' ||
+      this.partita.ruoloUtente=='Indemoniato'">Hai vinto, sono rimasti solo 2 buoni in vita</p>
+
+      <p *ngIf="
+      this.partita.ruoloUtente!='Lupo' &&
+      this.partita.ruoloUtente!='Indemoniato'">Hai perso, siete rimasti solo 2 buoni in vita</p>
+
+    </div>
+
+
   </div>
 
 </div>
